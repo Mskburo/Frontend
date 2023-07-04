@@ -16,14 +16,10 @@
                     Все
                 </button>
                 <button
-                    @click="changeCategory(1)"
-                    :class="{ active: this.currentCategory === 1 }">
-                    Категория 1
-                </button>
-                <button
-                    @click="changeCategory(2)"
-                    :class="{ active: this.currentCategory === 2 }">
-                    Категория 2
+                    v-for="category in this.categories"
+                    @click="changeCategory(category.id)"
+                    :class="{ active: this.currentCategory === category.id }">
+                    {{ category.name }}
                 </button>
             </div>
             <div class="list column row">
@@ -32,8 +28,9 @@
                     class="list__item row column"
                     v-for="item in this.listToShow">
                     <p>id: {{ item.id }}</p>
-                    <p class="bold">userId: {{ item.userId }}</p>
-                    <p>Название: {{ item.title }}</p>
+                    <p>Название: {{ item.name }}</p>
+                    <p>Категория: {{ item.category.name }}</p>
+                    <p>Описание: {{ item.description }}</p>
                 </div>
             </div>
         </section>
@@ -84,8 +81,9 @@ export default {
     components: {},
     data() {
         return {
-            list: [{ id: -1, title: "Не загрузилось)" }],
+            list: [{ id: -1, name: "Не загрузилось)" }],
             listToShow: [],
+            categories: [],
             currentCategory: 0,
             showCategories: true,
             showTickets: true,
@@ -128,19 +126,30 @@ export default {
                 this.listToShow = this.list;
             } else {
                 this.listToShow = this.list.filter(
-                    (a) => a.userId === categoryId
+                    (a) => a.category_id === categoryId
                 );
             }
             this.currentCategory = categoryId;
         },
+        loadExcursions() {
+            axios
+                .get("http://localhost:8080/api/excursions")
+                .then((response) => {
+                    this.list = response.data;
+                    this.listToShow = this.list;
+                });
+        },
+        loadCategories() {
+            axios
+                .get("http://localhost:8080/api/categories")
+                .then((response) => {
+                    this.categories = response.data;
+                    this.loadExcursions();
+                });
+        },
     },
     created() {
-        axios
-            .get("https://jsonplaceholder.typicode.com/posts")
-            .then((response) => {
-                this.list = response.data;
-                this.listToShow = this.list;
-            });
+        this.loadCategories();
     },
 };
 </script>
