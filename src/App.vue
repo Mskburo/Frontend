@@ -107,19 +107,19 @@ export default {
             if (this.cart.totalPrice === 0) {
                 alert("Вы ничего не выбрали");
             }
-            axios
-                .post("http://localhost:80/createOrder", {
-                    id: this.cart.id,
-                    child: this.cart.child,
-                    parents: this.cart.parents,
-                    old: this.cart.old,
-                })
-                .then((response) => {
-                    console.log(response);
-                })
-                .catch((error) => {
-                    console.log(error);
-                });
+            // axios
+            //     .post("https://jsonplaceholder.typicode.com/posts", {
+            //         id: this.cart.id,
+            //         child: this.cart.child,
+            //         parents: this.cart.parents,
+            //         old: this.cart.old,
+            //     })
+            //     .then((response) => {
+            //         console.log(response);
+            //     })
+            //     .catch((error) => {
+            //         console.log(error);
+            //     });
         },
         changeCategory(categoryId) {
             if (categoryId === 0) {
@@ -132,24 +132,30 @@ export default {
             this.currentCategory = categoryId;
         },
         loadExcursions() {
-            axios
-                .get("http://localhost:8080/api/excursions")
-                .then((response) => {
-                    this.list = response.data;
-                    this.listToShow = this.list;
-                });
+            // axios
+            //     .get("https://jsonplaceholder.typicode.com/posts")
+            //     .then((response) => {
+            //         this.list = response.data;
+            //         this.listToShow = this.list;
+            //     });
         },
         loadCategories() {
-            axios
-                .get("http://localhost:8080/api/categories")
-                .then((response) => {
-                    this.categories = response.data;
-                    this.loadExcursions();
-                });
+            // axios
+            //     .get("https://jsonplaceholder.typicode.com/posts")
+            //     .then((response) => {
+            //         this.categories = response.data;
+            //         this.loadExcursions();
+            //     });
         },
     },
     created() {
-        this.loadCategories();
+        // this.loadCategories();
+        axios
+            // .get("https://jsonplaceholder.typicode.com/posts")
+            .get("http://127.0.0.1:8080/excursions")
+            .then((response) => {
+                console.log(response)
+            });
     },
 };
 </script>
