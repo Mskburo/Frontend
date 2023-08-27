@@ -148,14 +148,34 @@ export default {
             //     });
         },
     },
-    created() {
+    async created() {
+        let url = "http://localhost:8090/api/v1/excursions";
         // this.loadCategories();
-        axios
-            // .get("https://jsonplaceholder.typicode.com/posts")
-            .get("http://127.0.0.1:8080/excursions")
+        await axios
+            .post(url, {
+                name: "sss",
+                description: "description",
+                ex_type: "Bus",
+                costs: [
+                    {
+                        name: "Базовая",
+                        price: 100.0,
+                    },
+                    {
+                        name: "Деды",
+                        price: 50.0,
+                    },
+                ],
+                photos: ["/hi.webp"],
+                is_active: true,
+                tickets_available: 10,
+            })
             .then((response) => {
-                console.log(response)
+                console.log(response);
             });
+        await axios.get(url).then((response) => {
+            console.log(response);
+        });
     },
 };
 </script>
