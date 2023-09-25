@@ -8,7 +8,7 @@
     --dark-blue: #1B143D;
     --blue: #0073DE;
 
-    --accent-color: #cfb81e;
+    --accent-color: rgb(225, 225, 2);
     --bg-main: white;
     --bg-hf: var(--dark-blue);
 }
@@ -412,7 +412,7 @@ h2 {
     flex-grow: 1;
 }
 
-.blue-btn {
+.accent-btn {
     color: #000;
     font-size: 20px;
     font-weight: 600;
@@ -422,8 +422,8 @@ h2 {
     transition: 0.3s;
 }
 
-.blue-btn.active,
-.blue-btn:hover {
+.accent-btn.active,
+.accent-btn:hover {
     background: var(--accent-color);
     color: #FFF;
 }

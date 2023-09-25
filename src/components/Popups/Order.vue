@@ -4,7 +4,7 @@
             X
         </button>
         <div>
-            <p class="popup__title">Оформление: {{ excursionInfo.name }}</p>
+            <p class="popup__title">Оформление: {{ excursionInfo.excursion_info.name }}</p>
             <p class="popup__subtitle">Этап: {{ step }}/3</p>
         </div>
         <fieldset v-if="step === 1">
@@ -21,7 +21,7 @@
                 <label>Выберите время:</label>
                 <div class="order-select-row track">
                     <button
-                        v-for="time in excursionInfo.times"
+                        v-for="time in excursionInfo.excursion_info.times"
                         type="button"
                         @click="selectedTime = time"
                         :class="{ active: selectedTime === time }">
@@ -35,7 +35,7 @@
                 <div class="order-tickets indent">
                     <div class="ticket" v-for="ticket in excursionInfo.tickets">
                         <p class="ticket__info">
-                            {{ ticket.title_ru }}:<span class="dots"></span
+                            {{ ticket.name }}:<span class="dots"></span
                             ><span>{{ ticket.price }}₽</span>
                         </p>
                         <div class="ticket__control">
@@ -193,7 +193,6 @@ export default {
             email: null,
             total: 0,
             selected_tickets: {},
-            payment_type: null,
             availableNow: null,
             isInputsValid: false,
         };
@@ -249,7 +248,7 @@ export default {
                 newTotal += ticketCount * this.getTicketById(ticketId).price;
             });
             this.total = newTotal;
-            this.availableNow = this.excursionInfo.available - newCount;
+            this.availableNow = this.excursionInfo.availableNow - newCount;
         },
         getTicketCount(id) {
             return this.selected_tickets[id] ?? 0;
@@ -270,7 +269,7 @@ export default {
                 let ticketCount = parseInt(ticketInfo[1]);
                 result.push(
                     `${
-                        this.getTicketById(ticketId).title_ru
+                        this.getTicketById(ticketId).name
                     } ${ticketCount} шт.`
                 );
             });
@@ -282,7 +281,7 @@ export default {
     },
     created() {
         this.excursionInfo = this.$store.state.popupInfo;
-        this.availableNow = this.excursionInfo.available;
+        this.availableNow = this.excursionInfo.availableNow;
     },
 };
 </script>

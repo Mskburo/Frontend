@@ -57,10 +57,14 @@
             <section class="excursions" id="excursions">
                 <div class="h-row">
                     <h2>Экскурсии</h2>
-                    <div class="switch">
+                    <div class="switch" v-if="excursionsTypes.length > 1">
                         <button
-                            v-for="excursionType in this.$store.state
-                                .excursions_types"
+                            @click="changeSwitch('Все')"
+                            :class="{ active: switchValue === 'Все' }">
+                            Все
+                        </button>
+                        <button
+                            v-for="excursionType in excursionsTypes"
                             @click="changeSwitch(excursionType)"
                             :class="{ active: switchValue === excursionType }">
                             {{ excursionType }}
@@ -68,61 +72,8 @@
                     </div>
                 </div>
                 <div class="grid">
-                    <div
-                        class="excursion-wrapper"
-                        v-for="excursion in excursionsToShow">
-                        <div class="excursion" v-if="excursion.is_active">
-                            <img
-                                :src="'/img/' + excursion.photo"
-                                :alt="excursion.name"
-                                class="excursion__img" />
-                            <div class="header-row">
-                                <div class="title-wrapper">
-                                    <p class="title">{{ excursion.name }}</p>
-                                    <p class="type">{{ excursion.type }}</p>
-                                </div>
-                                <div class="info">
-                                    <p class="row">
-                                        <img
-                                            src="@/assets/img/map.svg"
-                                            alt="Маршрут" />
-                                        {{ excursion.short_route }}
-                                    </p>
-                                    <p class="row">
-                                        <img
-                                            src="@/assets/img/clock.svg"
-                                            alt="Время" />
-                                        {{ excursion.time }}
-                                    </p>
-                                </div>
-                            </div>
-                            <p class="description">
-                                {{ excursion.short_description }}
-                            </p>
-                            <div class="buttons">
-                                <button
-                                    class="blue-btn"
-                                    @click="
-                                        this.$store.commit('OPEN_POPUP', {
-                                            name: 'ExcursionMore',
-                                            info: excursion,
-                                        })
-                                    ">
-                                    Подробнее
-                                </button>
-                                <button
-                                    class="blue-btn active animated-btn"
-                                    @click="
-                                        this.$store.commit('OPEN_POPUP', {
-                                            name: 'Order',
-                                            info: excursion,
-                                        })
-                                    ">
-                                    Записаться
-                                </button>
-                            </div>
-                        </div>
-                    </div>
+                    <Excursion
+                        v-for="excursion in excursionsToShow" :excursion="excursion" :key="excursion.excursion_info.id"></Excursion>
                 </div>
             </section>
             <section class="gallery" id="gallery">
@@ -167,7 +118,7 @@
                 </p>
                 <div class="centered">
                     <button
-                        class="blue-btn active animated-btn"
+                        class="accent-btn active animated-btn"
                         @click="
                             this.$store.commit('OPEN_POPUP', {
                                 name: 'Special',
@@ -182,14 +133,17 @@
 </template>
 <script>
 import axios from "axios";
+import Excursion from "@/components/Excursion.vue";
 
 export default {
     name: "Index",
+    components: { Excursion },
     data() {
         return {
             switchValue: "Все",
             excursions: [],
             excursionsToShow: [],
+            excursionsTypes: [],
         };
     },
     methods: {
@@ -199,18 +153,30 @@ export default {
                 this.excursionsToShow = this.excursions;
             } else {
                 this.excursionsToShow = this.excursions.filter(
-                    (a) => a.type === value
+                    (excursion) => excursion.excursion_info.type === value
                 );
             }
         },
+        getExcursionsTypes() {
+            let result = [];
+            this.excursions.forEach((excursion) => {
+                result.push(excursion.excursion_info.type);
+            });
+            this.excursionsTypes = [...new Set(result)];
+        },
     },
     created() {
-        axios
-            .get(`${this.$store.state.API_URL}/excursions`)
-            .then((response) => {
-                this.excursions = response.data;
-                this.excursionsToShow = response.data;
-            });
+        // axios
+        //     .get(`${this.$store.state.API_URL}/excursions`)
+        //     .then((response) => {
+        //         this.excursions = response.data;
+        //         this.excursionsToShow = response.data;
+        //     }).catch(err => {
+        //         console.log(err)
+        //     });
+        this.excursions = this.$store.state.excursions;
+        this.excursionsToShow = this.excursions;
+        this.getExcursionsTypes();
     },
 };
 </script>
