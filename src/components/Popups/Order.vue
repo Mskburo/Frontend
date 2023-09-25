@@ -4,7 +4,7 @@
             X
         </button>
         <div>
-            <p class="popup__title">Оформление: {{ excursionInfo.excursion_info.name }}</p>
+            <p class="popup__title">Оформление: {{ excursionInfo.excursion.name }}</p>
             <p class="popup__subtitle">Этап: {{ step }}/3</p>
         </div>
         <fieldset v-if="step === 1">
@@ -21,7 +21,7 @@
                 <label>Выберите время:</label>
                 <div class="order-select-row track">
                     <button
-                        v-for="time in excursionInfo.excursion_info.times"
+                        v-for="time in excursionInfo.excursion.times"
                         type="button"
                         @click="selectedTime = time"
                         :class="{ active: selectedTime === time }">
@@ -35,8 +35,8 @@
                 <div class="order-tickets indent">
                     <div class="ticket" v-for="ticket in excursionInfo.tickets">
                         <p class="ticket__info">
-                            {{ ticket.name }}:<span class="dots"></span
-                            ><span>{{ ticket.price }}₽</span>
+                            {{ ticket.customers_type_name }}:<span class="dots"></span
+                            ><span>{{ ticket.cost }}₽</span>
                         </p>
                         <div class="ticket__control">
                             <button
@@ -180,6 +180,8 @@
     </form>
 </template>
 <script>
+import axios from "axios";
+
 export default {
     name: "OrderPopup",
     data() {
@@ -197,14 +199,30 @@ export default {
             isInputsValid: false,
         };
     },
+    watch: {
+        selectedTime(newValue, oldValue) {
+            if (newValue !== null) this.getTicketsCount();
+            // console.log(new Date().getDate())
+            // console.log(new Date().get)
+        },
+    },
     methods: {
+        getTicketsCount() {
+            axios
+                .get(
+                    `${this.$store.state.API_URL}/excursions/?excursion_id=${this.excursionInfo.excursion.id}&time=${this.selectedTime}&date=${this.selectedDate}`
+                )
+                .then((response) => {
+                    this.availableNow = response.data;
+                });
+        },
         getDateLimitation() {
             let min = new Date()
                 .toLocaleDateString()
                 .split(".")
                 .reverse()
                 .join("-");
-            let max = '';
+            let max = "";
 
             return { min, max };
         },
@@ -245,17 +263,17 @@ export default {
                 let ticketId = parseInt(ticketInfo[0]);
                 let ticketCount = parseInt(ticketInfo[1]);
                 newCount += ticketCount;
-                newTotal += ticketCount * this.getTicketById(ticketId).price;
+                newTotal += ticketCount * this.getTicketById(ticketId).cost;
             });
             this.total = newTotal;
-            this.availableNow = this.excursionInfo.availableNow - newCount;
+            this.availableNow = this.excursionInfo.excursion.availableNow - newCount;
         },
         getTicketCount(id) {
             return this.selected_tickets[id] ?? 0;
         },
         getTicketById(id) {
             let result = {};
-            Object.values(this.excursionInfo.tickets).forEach((ticket) => {
+            Object.values(this.excursionInfo.excursion.tickets).forEach((ticket) => {
                 if (ticket.id === id) {
                     result = ticket;
                 }
@@ -268,9 +286,7 @@ export default {
                 let ticketId = parseInt(ticketInfo[0]);
                 let ticketCount = parseInt(ticketInfo[1]);
                 result.push(
-                    `${
-                        this.getTicketById(ticketId).name
-                    } ${ticketCount} шт.`
+                    `${this.getTicketById(ticketId).customers_type_name} ${ticketCount} шт.`
                 );
             });
             return result.join(", ");
@@ -281,7 +297,7 @@ export default {
     },
     created() {
         this.excursionInfo = this.$store.state.popupInfo;
-        this.availableNow = this.excursionInfo.availableNow;
+        this.availableNow = this.excursionInfo.excursion.availableNow;
     },
 };
 </script>

@@ -8,7 +8,7 @@
     --dark-blue: #1B143D;
     --blue: #0073DE;
 
-    --accent-color: rgb(225, 225, 2);
+    --accent-color: rgb(225, 136, 2);
     --bg-main: white;
     --bg-hf: var(--dark-blue);
 }
@@ -893,9 +893,11 @@ p.tickets-available {
     justify-content: center;
 }
 
-.loader .logo {
+.loader .loader-logo {
     transition: 0.3s;
     animation: loader 2s infinite;
+    width: 300px;
+    height: 300px;
 }
 
 .loader p {

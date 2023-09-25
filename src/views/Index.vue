@@ -73,7 +73,9 @@
                 </div>
                 <div class="grid">
                     <Excursion
-                        v-for="excursion in excursionsToShow" :excursion="excursion" :key="excursion.excursion_info.id"></Excursion>
+                        v-for="excursionObject in excursionsToShow"
+                        :excursionObject="excursionObject"
+                        :key="excursionObject.excursion.id"></Excursion>
                 </div>
             </section>
             <section class="gallery" id="gallery">
@@ -153,30 +155,44 @@ export default {
                 this.excursionsToShow = this.excursions;
             } else {
                 this.excursionsToShow = this.excursions.filter(
-                    (excursion) => excursion.excursion_info.type === value
+                    (excursion) => excursion.type_name === value
                 );
             }
         },
         getExcursionsTypes() {
             let result = [];
             this.excursions.forEach((excursion) => {
-                result.push(excursion.excursion_info.type);
+                result.push(excursion.type_name);
             });
             this.excursionsTypes = [...new Set(result)];
         },
     },
     created() {
+        axios
+            .get(`${this.$store.state.API_URL}/excursions`)
+            .then((response) => {
+                this.excursions = response.data;
+                this.excursionsToShow = response.data;
+                this.getExcursionsTypes();
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+
         // axios
-        //     .get(`${this.$store.state.API_URL}/excursions`)
+        //     .put(`${this.$store.state.API_URL}/admin/excursions/costs/types`, {
+        //         name: 'Абоба1'
+        //     }, {
+        //         headers: {
+        //             Authorization: 'Bearer af630897685a5bd0fcc42f0508607cef5df8c052ee83bbbea2f679241fb412f6'
+        //         }
+        //     })
         //     .then((response) => {
-        //         this.excursions = response.data;
-        //         this.excursionsToShow = response.data;
-        //     }).catch(err => {
-        //         console.log(err)
+        //         console.log(response)
+        //     })
+        //     .catch((err) => {
+        //         console.log(err);
         //     });
-        this.excursions = this.$store.state.excursions;
-        this.excursionsToShow = this.excursions;
-        this.getExcursionsTypes();
     },
 };
 </script>

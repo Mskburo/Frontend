@@ -2,29 +2,29 @@
     <div class="excursion-wrapper">
         <div class="excursion">
             <img
-                :src="'/img/' + excursion.excursion_info.photo"
-                :alt="excursion.excursion_info.name"
+                :src="'/img/' + excursionObject.excursion.photo"
+                :alt="excursionObject.excursion.name"
                 class="excursion__img" />
             <div class="header-row">
                 <div class="title-wrapper">
-                    <p class="title">{{ excursion.excursion_info.name }}</p>
+                    <p class="title">{{ excursionObject.excursion.name }}</p>
                     <p class="type">
-                        {{ excursion.excursion_info.type }}
+                        {{ excursionObject.excursion.type_name }}
                     </p>
                 </div>
                 <div class="info">
                     <p class="row">
                         <img src="@/assets/img/map.svg" alt="Маршрут" />
-                        {{ excursion.excursion_info.short_route }}
+                        {{ excursionObject.excursion.short_route }}
                     </p>
                     <p class="row">
                         <img src="@/assets/img/clock.svg" alt="Время" />
-                        {{ excursion.excursion_info.time }}
+                        {{ excursionObject.excursion.time }}
                     </p>
                 </div>
             </div>
             <p class="description">
-                {{ excursion.excursion_info.short_description }}
+                {{ excursionObject.excursion.short_description }}
             </p>
             <div class="buttons">
                 <button
@@ -32,7 +32,7 @@
                     @click="
                         this.$store.commit('OPEN_POPUP', {
                             name: 'ExcursionMore',
-                            info: excursion,
+                            info: excursionObject,
                         })
                     ">
                     Подробнее
@@ -42,7 +42,7 @@
                     @click="
                         this.$store.commit('OPEN_POPUP', {
                             name: 'Order',
-                            info: excursion,
+                            info: excursionObject,
                         })
                     ">
                     Записаться
@@ -55,11 +55,8 @@
 export default {
     name: "ExcursionCard",
     props: {
-        excursion: Object,
+        excursionObject: Object,
     },
-    created() {
-        console.log(this.excursion)
-    }
 };
 </script>
 <style lang=""></style>
