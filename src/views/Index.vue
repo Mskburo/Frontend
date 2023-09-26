@@ -155,14 +155,14 @@ export default {
                 this.excursionsToShow = this.excursions;
             } else {
                 this.excursionsToShow = this.excursions.filter(
-                    (excursion) => excursion.type_name === value
+                    (excursionObject) => excursionObject.excursion.type_name === value
                 );
             }
         },
         getExcursionsTypes() {
             let result = [];
-            this.excursions.forEach((excursion) => {
-                result.push(excursion.type_name);
+            this.excursions.forEach((excursionObject) => {
+                result.push(excursionObject.excursion.type_name);
             });
             this.excursionsTypes = [...new Set(result)];
         },

@@ -27,4 +27,5 @@ export default {
 
 <style>
 @import "@/assets/css/main.css";
+@import "@/assets/css/media.css";
 </style>

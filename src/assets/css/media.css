@@ -1,0 +1,28 @@
+@media screen and (max-width: 1301px) {
+    .burger{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 20px;
+    }
+    .header .header__inner.burger-open{
+        align-items: flex-start;
+    }
+    .burger .burger-btn, .burger-btn-wrapper {
+        display: flex;
+    }
+    .burger .burger-inner {
+        display: none;
+    }
+    .burger-open .burger .burger-inner {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 20px;
+    }
+    .header .header__nav, .header .header__buttons{
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 10px;
+    }
+}
