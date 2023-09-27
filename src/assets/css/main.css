@@ -18,7 +18,7 @@
     padding: 0;
     box-sizing: border-box;
     font-family: inherit;
-    /* outline: 1px solid green; */
+    outline: 1px solid green;
 }
 
 ::-webkit-scrollbar {
@@ -619,13 +619,13 @@ h2 {
     background: white;
     border-radius: var(--border-radius);
     overflow: hidden auto;
-    /* x y */
     max-height: 95vh;
+    width: 600px;
 }
 
 .popup {
     padding: 50px;
-    width: 600px;
+    width: 100%;
     display: flex;
     align-items: stretch;
     flex-direction: column;

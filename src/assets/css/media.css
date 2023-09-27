@@ -1,26 +1,33 @@
 @media screen and (max-width: 1301px) {
-    .burger{
+    .burger {
         display: flex;
         flex-direction: column;
         align-items: flex-end;
         gap: 20px;
     }
-    .header .header__inner.burger-open{
+
+    .header .header__inner.burger-open {
         align-items: flex-start;
     }
-    .burger .burger-btn, .burger-btn-wrapper {
+
+    .burger .burger-btn,
+    .burger-btn-wrapper {
         display: flex;
     }
+
     .burger .burger-inner {
         display: none;
     }
+
     .burger-open .burger .burger-inner {
         display: flex;
         flex-direction: column;
         align-items: flex-end;
         gap: 20px;
     }
-    .header .header__nav, .header .header__buttons{
+
+    .header .header__nav,
+    .header .header__buttons {
         flex-direction: column;
         align-items: flex-end;
         gap: 10px;
@@ -28,28 +35,70 @@
 }
 
 @media screen and (max-width: 1201px) {
-    .about .about__img{
+    .about .about__img {
         width: 60%;
         height: unset;
     }
 }
 
 @media screen and (max-width: 901px) {
-    .excursions .grid{
+    .excursions .grid {
         justify-content: center;
     }
-    .excursion-wrapper{
+
+    .excursion-wrapper {
         width: 80%;
+    }
+
+    .gallery img {
+        width: 40%;
     }
 }
 
 @media screen and (max-width: 801px) {
-    .about .row{
+    .about .row {
         flex-direction: column;
         align-items: flex-start;
         gap: 10px;
     }
-    .about .row .num{
+    .about .about__img{
+        width: 100%;
+    }
+    .track {
+        flex-wrap: wrap;
+    }
+
+    .indent {
+        padding-left: 20px;
+    }
+
+    .about .row .num {
         width: unset;
+    }
+
+    .gallery img {
+        width: 100%;
+    }
+}
+@media screen and (max-width: 631px) {
+    .excursion .buttons{
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .popup-wrapper {
+        width: 90%;
+    }
+    .excursion-wrapper{
+        width: 100%;
+    }
+    .excursion .header-row{
+        flex-direction: column;
+    }
+}
+
+@media screen and (max-width: 501px) {
+    .footer .logo {
+        flex-direction: column;
+        align-items: flex-start;
     }
 }
