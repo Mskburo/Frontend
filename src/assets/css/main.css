@@ -18,7 +18,7 @@
     padding: 0;
     box-sizing: border-box;
     font-family: inherit;
-    outline: 1px solid green;
+    /* outline: 1px solid green; */
 }
 
 ::-webkit-scrollbar {

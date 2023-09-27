@@ -104,32 +104,9 @@
                 <label>Ваш заказ:</label>
                 <div class="indent">
                     <p class="popup__p mb10">
-                        Дата и время: {{ selectedDate }} {{ selectedTime }}
+                        Дата и время: {{ selectedDate.split("-").reverse().join(".") }} в {{ selectedTime }}
                     </p>
                     <p class="popup__p">Билеты: {{ getOrderString() }}</p>
-                </div>
-            </div>
-            <div class="input-wrapper">
-                <label>Тип оплаты:</label>
-                <div class="input-radio-wrapper">
-                    <div class="input-radio">
-                        <input
-                            type="radio"
-                            id="online"
-                            value="online"
-                            v-model="payment_type"
-                            required />
-                        <label for="online">Картой сейчас</label>
-                    </div>
-                    <div class="input-radio">
-                        <input
-                            type="radio"
-                            id="cash"
-                            value="cash"
-                            v-model="payment_type"
-                            required />
-                        <label for="cash">Наличными в день экскурсии</label>
-                    </div>
                 </div>
             </div>
             <p class="popup__p"><span>Итого: </span>{{ total }}₽</p>
@@ -162,8 +139,8 @@
             </button>
             <button
                 v-if="step === 3"
-                :class="[payment_type ? 'animated-btn' : 'disabled']">
-                {{ payment_type === "online" ? "Оплатить" : "Оформить" }}
+                class="animated-btn">
+                Оплатить
             </button>
         </div>
         <p class="popup__warning" v-if="step === 3">
@@ -196,6 +173,8 @@ export default {
             total: 0,
             selected_tickets: {},
             availableNow: null,
+            availableLeft: null,
+            ticketsBought: null,
             isInputsValid: false,
         };
     },
@@ -213,7 +192,9 @@ export default {
                     `${this.$store.state.API_URL}/excursions/?excursion_id=${this.excursionInfo.excursion.id}&time=${this.selectedTime}&date=${this.selectedDate}`
                 )
                 .then((response) => {
-                    this.availableNow = response.data;
+                    this.tickets_bought = response.data;
+                    this.availableNow = this.excursionInfo.excursion.available - response.data;
+                    this.availableLeft = this.excursionInfo.excursion.available - response.data;
                 });
         },
         getDateLimitation() {
@@ -266,14 +247,14 @@ export default {
                 newTotal += ticketCount * this.getTicketById(ticketId).cost;
             });
             this.total = newTotal;
-            this.availableNow = this.excursionInfo.excursion.availableNow - newCount;
+            this.availableNow = this.availableLeft - newCount;
         },
         getTicketCount(id) {
             return this.selected_tickets[id] ?? 0;
         },
         getTicketById(id) {
             let result = {};
-            Object.values(this.excursionInfo.excursion.tickets).forEach((ticket) => {
+            Object.values(this.excursionInfo.tickets).forEach((ticket) => {
                 if (ticket.id === id) {
                     result = ticket;
                 }
