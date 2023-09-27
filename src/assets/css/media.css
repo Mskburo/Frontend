@@ -26,3 +26,30 @@
         gap: 10px;
     }
 }
+
+@media screen and (max-width: 1201px) {
+    .about .about__img{
+        width: 60%;
+        height: unset;
+    }
+}
+
+@media screen and (max-width: 901px) {
+    .excursions .grid{
+        justify-content: center;
+    }
+    .excursion-wrapper{
+        width: 80%;
+    }
+}
+
+@media screen and (max-width: 801px) {
+    .about .row{
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    .about .row .num{
+        width: unset;
+    }
+}

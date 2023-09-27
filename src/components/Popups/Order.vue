@@ -278,7 +278,6 @@ export default {
     },
     created() {
         this.excursionInfo = this.$store.state.popupInfo;
-        this.availableNow = this.excursionInfo.excursion.availableNow;
     },
 };
 </script>

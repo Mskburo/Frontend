@@ -55,8 +55,8 @@
                 <img src="@/assets/img/about.png" alt="" class="about__img" />
             </section>
             <section class="excursions" id="excursions">
-                <div class="h-row">
-                    <h2>Экскурсии</h2>
+                <h2>Экскурсии</h2>
+                <div class="switch-wrapper">
                     <div class="switch" v-if="excursionsTypes.length > 1">
                         <button
                             @click="changeSwitch('Все')"
