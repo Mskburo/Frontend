@@ -37,7 +37,7 @@
             Нажимая на кнопку, вы даете согласие на обработку персональных
             данных и соглашаетесь с
             <a
-                href="files/CV.pdf"
+                href="files/test.pdf"
                 type="application/pdf"
                 target="_blank"
                 class="blue"

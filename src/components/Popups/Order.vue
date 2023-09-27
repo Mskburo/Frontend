@@ -4,7 +4,9 @@
             X
         </button>
         <div>
-            <p class="popup__title">Оформление: {{ excursionInfo.excursion.name }}</p>
+            <p class="popup__title">
+                Оформление: {{ excursionInfo.excursion.name }}
+            </p>
             <p class="popup__subtitle">Этап: {{ step }}/3</p>
         </div>
         <fieldset v-if="step === 1">
@@ -35,7 +37,8 @@
                 <div class="order-tickets indent">
                     <div class="ticket" v-for="ticket in excursionInfo.tickets">
                         <p class="ticket__info">
-                            {{ ticket.customers_type_name }}:<span class="dots"></span
+                            {{ ticket.customers_type_name }}:<span
+                                class="dots"></span
                             ><span>{{ ticket.cost }}₽</span>
                         </p>
                         <div class="ticket__control">
@@ -104,7 +107,9 @@
                 <label>Ваш заказ:</label>
                 <div class="indent">
                     <p class="popup__p mb10">
-                        Дата и время: {{ selectedDate.split("-").reverse().join(".") }} в {{ selectedTime }}
+                        Дата и время:
+                        {{ selectedDate.split("-").reverse().join(".") }} в
+                        {{ selectedTime }}
                     </p>
                     <p class="popup__p">Билеты: {{ getOrderString() }}</p>
                 </div>
@@ -137,17 +142,13 @@
                 }">
                 Далее
             </button>
-            <button
-                v-if="step === 3"
-                class="animated-btn">
-                Оплатить
-            </button>
+            <button v-if="step === 3" class="animated-btn">Оплатить</button>
         </div>
         <p class="popup__warning" v-if="step === 3">
             Нажимая на кнопку, вы даете согласие на обработку персональных
             данных и соглашаетесь с
             <a
-                href="files/CV.pdf"
+                href="files/test.pdf"
                 type="application/pdf"
                 target="_blank"
                 class="blue"
@@ -193,8 +194,10 @@ export default {
                 )
                 .then((response) => {
                     this.tickets_bought = response.data;
-                    this.availableNow = this.excursionInfo.excursion.available - response.data;
-                    this.availableLeft = this.excursionInfo.excursion.available - response.data;
+                    this.availableNow =
+                        this.excursionInfo.excursion.available - response.data;
+                    this.availableLeft =
+                        this.excursionInfo.excursion.available - response.data;
                 });
         },
         getDateLimitation() {
@@ -267,13 +270,46 @@ export default {
                 let ticketId = parseInt(ticketInfo[0]);
                 let ticketCount = parseInt(ticketInfo[1]);
                 result.push(
-                    `${this.getTicketById(ticketId).customers_type_name} ${ticketCount} шт.`
+                    `${
+                        this.getTicketById(ticketId).customers_type_name
+                    } ${ticketCount} шт.`
                 );
             });
             return result.join(", ");
         },
         makeRequest() {
-            console.log("a");
+            let tickets = [];
+            Object.entries(this.selected_tickets).forEach((ticketInfo) => {
+                tickets.push({
+                    customer_type_cost_id: this.getTicketById(
+                        parseInt(ticketInfo[0])
+                    ).id,
+                    amount: ticketInfo[1],
+                });
+            });
+
+            axios
+                .put(
+                    `${this.$store.state.API_URL}/carts`,
+                    {
+                        cart_info: {
+                            date: this.selectedDate,
+                            time: this.selectedTime,
+                            name: this.name,
+                            tel: this.tel,
+                            email: this.email,
+                            bill: "",
+                        },
+                        tickets: tickets,
+                    },
+                    {}
+                )
+                .catch((error) => {
+                    if (error.response.status === 307) {
+                        document.location.replace(error.response.data);
+                    }
+                    console.log(error);
+                });
         },
     },
     created() {

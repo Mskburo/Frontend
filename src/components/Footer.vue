@@ -8,10 +8,10 @@
             <div class="footer__top">
                 <div class="column">
                     <p class="title">Контакты</p>
-                    <a href="tel:+77777777777" class="text"
+                    <a href="tel:+79854346148" class="text"
                         >+7 (985) 434-61-48</a
                     >
-                    <a href="mailto:aboba@gmail.com" class="text"
+                    <a href="mailto:mskburo@yandex.com" class="text"
                         >mskburo@yandex.ru</a
                     >
                 </div>
@@ -24,7 +24,7 @@
                 <div class="column">
                     <p class="title">Документы</p>
                     <a
-                        href="files/CV.pdf"
+                        href="files/test.pdf"
                         type="application/pdf"
                         target="_blank"
                         class="text"
@@ -48,13 +48,13 @@
             </div>
             <div class="footer__bottom">
                 <div class="socials">
-                    <a href="http://"
+                    <a href="https://vk.com/moseksburo"
                         ><img src="@/assets/img/vk.svg" alt="ВКонтакте"
                     /></a>
-                    <a href="http://"
+                    <!-- <a href="http://"
                         ><img src="@/assets/img/tg.svg" alt="Телеграм"
-                    /></a>
-                    <a href="http://"
+                    /></a> -->
+                    <a href="https://wa.me/79854346148?"
                         ><img src="@/assets/img/whatsapp.svg" alt="Вотсап"
                     /></a>
                 </div>

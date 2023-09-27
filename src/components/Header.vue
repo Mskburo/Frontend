@@ -15,15 +15,15 @@
                 </div>
                 <div class="burger-inner">
                     <nav class="header__nav">
-                        <a href="#hero" class="link">Главная</a>
-                        <a href="#about" class="link">О нас</a>
-                        <a href="#excursions" class="link">Экскурсии</a>
-                        <a href="#gallery" class="link">Галерея</a>
-                        <a href="#special" class="link">Спец. экскурсии</a>
-                        <a href="#footer" class="link">Контакты</a>
+                        <a href="/#hero" class="link">Главная</a>
+                        <a href="/#about" class="link">О нас</a>
+                        <a href="/#excursions" class="link">Экскурсии</a>
+                        <a href="/#gallery" class="link">Галерея</a>
+                        <a href="/#special" class="link">Спец. экскурсии</a>
+                        <a href="/#footer" class="link">Контакты</a>
                     </nav>
                     <div class="header__buttons">
-                        <a href="http://"
+                        <a href="https://wa.me/79854346148"
                             ><svg
                                 width="20"
                                 height="20"

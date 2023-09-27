@@ -178,21 +178,6 @@ export default {
             .catch((err) => {
                 console.log(err);
             });
-
-        // axios
-        //     .put(`${this.$store.state.API_URL}/admin/excursions/costs/types`, {
-        //         name: 'Абоба1'
-        //     }, {
-        //         headers: {
-        //             Authorization: 'Bearer af630897685a5bd0fcc42f0508607cef5df8c052ee83bbbea2f679241fb412f6'
-        //         }
-        //     })
-        //     .then((response) => {
-        //         console.log(response)
-        //     })
-        //     .catch((err) => {
-        //         console.log(err);
-        //     });
     },
 };
 </script>
