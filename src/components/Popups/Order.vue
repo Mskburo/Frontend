@@ -16,7 +16,6 @@
                     type="date"
                     v-model="selectedDate"
                     :min="getDateLimitation().min"
-                    :max="getDateLimitation().max"
                     required />
             </div>
             <div class="input-wrapper" v-if="selectedDate">
@@ -63,7 +62,9 @@
                     Ошибка получения количества билетов. Попробуйте
                     перезагрузить сайт или свяжитесь с нами через востап.
                 </p>
-                <p class="red-warning" v-if="selectedTime && availableNow !== null">
+                <p
+                    class="red-warning"
+                    v-if="selectedTime && availableNow !== null">
                     {{
                         availableNow === 0
                             ? `Билетов не осталось`
@@ -198,27 +199,24 @@ export default {
         },
         selectedDate(newValue, oldValue) {
             this.selectedTime = null;
-
             let date = new Date();
             let isToday =
                 date.toLocaleDateString().split(".").reverse().join("-") ===
                 this.selectedDate;
 
-            this.availableTimes = [...this.excursionInfo.excursion.times];
-
             if (isToday) {
                 let currentHours = date.getHours();
                 let currentMinutes = date.getMinutes();
 
-                this.availableTimes = [...this.availableTimes].filter(
-                    (time) => {
-                        let hours = parseInt(time.split(":")[0]);
-                        let minutes = parseInt(time.split(":")[1]);
-                        return !(
-                            currentHours >= hours && currentMinutes >= minutes
-                        );
-                    }
-                );
+                this.availableTimes = [
+                    ...this.excursionInfo.excursion.times,
+                ].filter((time) => {
+                    let hours = parseInt(time.split(":")[0]);
+                    let minutes = parseInt(time.split(":")[1]);
+                    return !(
+                        currentHours >= hours && currentMinutes >= minutes
+                    );
+                });
             } else {
                 this.availableTimes = [...this.excursionInfo.excursion.times];
             }
@@ -248,9 +246,8 @@ export default {
                 .split(".")
                 .reverse()
                 .join("-");
-            let max = "";
 
-            return { min, max };
+            return { min };
         },
         checkInputsValid() {
             let validName = this.name?.length >= 2 && this.name?.length <= 20;
