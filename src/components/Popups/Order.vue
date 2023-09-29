@@ -23,12 +23,15 @@
                 <label>Выберите время:</label>
                 <div class="order-select-row track">
                     <button
-                        v-for="time in excursionInfo.excursion.times"
+                        v-for="time in availableTimes"
                         type="button"
                         @click="selectedTime = time"
                         :class="{ active: selectedTime === time }">
                         <p>{{ time }}</p>
                     </button>
+                    <p v-if="availableTimes.length === 0" class="red-warning">
+                        Нет доступного времени, выберите другую дату
+                    </p>
                 </div>
             </div>
 
@@ -56,7 +59,11 @@
                         </div>
                     </div>
                 </div>
-                <p class="tickets-available" v-if="selectedTime">
+                <p class="red-warning" v-if="availableNow === null">
+                    Ошибка получения количества билетов. Попробуйте
+                    перезагрузить сайт или свяжитесь с нами через востап.
+                </p>
+                <p class="red-warning" v-if="selectedTime && availableNow !== null">
                     {{
                         availableNow === 0
                             ? `Билетов не осталось`
@@ -73,6 +80,7 @@
             <div class="input-wrapper">
                 <label>Ваше имя:</label>
                 <input
+                    :class="[isNameValid ? 'valid' : 'notValid']"
                     type="text"
                     @keyup="checkInputsValid"
                     v-model="name"
@@ -82,6 +90,7 @@
             <div class="input-wrapper">
                 <label>Ваш телефон:</label>
                 <input
+                    :class="[isTelValid ? 'valid' : 'notValid']"
                     type="tel"
                     @keyup="checkInputsValid"
                     v-model="tel"
@@ -91,11 +100,12 @@
             <div class="input-wrapper">
                 <label>Ваша почта:</label>
                 <input
+                    :class="[isEmailValid ? 'valid' : 'notValid']"
                     type="email"
                     @keyup="checkInputsValid"
                     v-model="email"
                     required
-                    placeholder="Указывайте настоящую почту, на неё придёт чек" />
+                    placeholder="На эту почту придёт чек" />
             </div>
         </fieldset>
 
@@ -175,15 +185,43 @@ export default {
             selected_tickets: {},
             availableNow: null,
             availableLeft: null,
-            ticketsBought: null,
             isInputsValid: false,
+            isNameValid: false,
+            isTelValid: false,
+            isEmailValid: false,
+            availableTimes: [],
         };
     },
     watch: {
         selectedTime(newValue, oldValue) {
             if (newValue !== null) this.getTicketsCount();
-            // console.log(new Date().getDate())
-            // console.log(new Date().get)
+        },
+        selectedDate(newValue, oldValue) {
+            this.selectedTime = null;
+
+            let date = new Date();
+            let isToday =
+                date.toLocaleDateString().split(".").reverse().join("-") ===
+                this.selectedDate;
+
+            this.availableTimes = [...this.excursionInfo.excursion.times];
+
+            if (isToday) {
+                let currentHours = date.getHours();
+                let currentMinutes = date.getMinutes();
+
+                this.availableTimes = [...this.availableTimes].filter(
+                    (time) => {
+                        let hours = parseInt(time.split(":")[0]);
+                        let minutes = parseInt(time.split(":")[1]);
+                        return !(
+                            currentHours >= hours && currentMinutes >= minutes
+                        );
+                    }
+                );
+            } else {
+                this.availableTimes = [...this.excursionInfo.excursion.times];
+            }
         },
     },
     methods: {
@@ -193,11 +231,15 @@ export default {
                     `${this.$store.state.API_URL}/excursions/?excursion_id=${this.excursionInfo.excursion.id}&time=${this.selectedTime}&date=${this.selectedDate}`
                 )
                 .then((response) => {
-                    this.tickets_bought = response.data;
                     this.availableNow =
                         this.excursionInfo.excursion.available - response.data;
                     this.availableLeft =
                         this.excursionInfo.excursion.available - response.data;
+                })
+                .catch((error) => {
+                    console.log(error);
+                    this.availableNow = null;
+                    this.availableLeft = null;
                 });
         },
         getDateLimitation() {
@@ -211,19 +253,29 @@ export default {
             return { min, max };
         },
         checkInputsValid() {
-            let isNameValid = false;
-            let isTelValid = false;
-            let isEmailValid = false;
-
-            let validName = this.name?.length >= 2;
-            let validTel = this.tel?.split("").length >= 8;
+            let validName = this.name?.length >= 2 && this.name?.length <= 20;
+            let validTel =
+                this.tel?.split("").length >= 8 &&
+                this.tel?.split("").length <= 20;
             let validEmail = /^.+@.+\..+/.test(this.email);
 
-            if (validName) isNameValid = true;
-            if (validTel) isTelValid = true;
-            if (validEmail) isEmailValid = true;
+            if (validName) {
+                this.isNameValid = true;
+            } else {
+                this.isNameValid = false;
+            }
+            if (validTel) {
+                this.isTelValid = true;
+            } else {
+                this.isTelValid = false;
+            }
+            if (validEmail) {
+                this.isEmailValid = true;
+            } else {
+                this.isEmailValid = false;
+            }
 
-            if (isNameValid && isTelValid && isEmailValid) {
+            if (this.isNameValid && this.isTelValid && this.isEmailValid) {
                 this.isInputsValid = true;
             } else {
                 this.isInputsValid = false;

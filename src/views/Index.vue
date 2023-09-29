@@ -52,11 +52,11 @@
                         </div>
                     </div>
                 </div>
-                <img src="@/assets/img/about.png" alt="" class="about__img" />
+                <img src="@/assets/img/about.webp" alt="" class="about__img" />
             </section>
             <section class="excursions" id="excursions">
                 <h2>Экскурсии</h2>
-                <div class="switch-wrapper">
+                <!-- <div class="switch-wrapper">
                     <div class="switch" v-if="excursionsTypes.length > 1">
                         <button
                             @click="changeSwitch('Все')"
@@ -70,8 +70,9 @@
                             {{ excursionType }}
                         </button>
                     </div>
-                </div>
+                </div> -->
                 <div class="grid">
+                    <p class="red-warning" v-if="excursions.length===0">Ошибка загрузки списка экскурсий, попробуйте перезагрузить сайт</p>
                     <Excursion
                         v-for="excursionObject in excursionsToShow"
                         :excursionObject="excursionObject"
@@ -81,12 +82,12 @@
             <section class="gallery" id="gallery">
                 <h2>Галерея</h2>
                 <div class="grid">
-                    <img src="@/assets/img/gallery1.png" alt="Галлерея1" />
-                    <img src="@/assets/img/gallery2.png" alt="Галлерея2" />
-                    <img src="@/assets/img/gallery3.png" alt="Галлерея3" />
-                    <img src="@/assets/img/gallery4.png" alt="Галлерея4" />
-                    <img src="@/assets/img/gallery5.png" alt="Галлерея5" />
-                    <img src="@/assets/img/gallery6.png" alt="Галлерея6" />
+                    <img src="@/assets/img/gallery1.webp" alt="Галлерея1" />
+                    <img src="@/assets/img/gallery2.webp" alt="Галлерея2" />
+                    <img src="@/assets/img/gallery3.webp" alt="Галлерея3" />
+                    <img src="@/assets/img/gallery4.webp" alt="Галлерея4" />
+                    <img src="@/assets/img/gallery5.webp" alt="Галлерея5" />
+                    <img src="@/assets/img/gallery6.webp" alt="Галлерея6" />
                 </div>
             </section>
             <section class="special" id="special">
@@ -142,30 +143,30 @@ export default {
     components: { Excursion },
     data() {
         return {
-            switchValue: "Все",
+            // switchValue: "Все",
             excursions: [],
             excursionsToShow: [],
             excursionsTypes: [],
         };
     },
     methods: {
-        changeSwitch(value) {
-            this.switchValue = value;
-            if (value === "Все") {
-                this.excursionsToShow = this.excursions;
-            } else {
-                this.excursionsToShow = this.excursions.filter(
-                    (excursionObject) => excursionObject.excursion.type_name === value
-                );
-            }
-        },
-        getExcursionsTypes() {
-            let result = [];
-            this.excursions.forEach((excursionObject) => {
-                result.push(excursionObject.excursion.type_name);
-            });
-            this.excursionsTypes = [...new Set(result)];
-        },
+        // changeSwitch(value) {
+        //     this.switchValue = value;
+        //     if (value === "Все") {
+        //         this.excursionsToShow = this.excursions;
+        //     } else {
+        //         this.excursionsToShow = this.excursions.filter(
+        //             (excursionObject) => excursionObject.excursion.type_name === value
+        //         );
+        //     }
+        // },
+        // getExcursionsTypes() {
+        //     let result = [];
+        //     this.excursions.forEach((excursionObject) => {
+        //         result.push(excursionObject.excursion.type_name);
+        //     });
+        //     this.excursionsTypes = [...new Set(result)];
+        // },
     },
     created() {
         axios
@@ -173,10 +174,11 @@ export default {
             .then((response) => {
                 this.excursions = response.data;
                 this.excursionsToShow = response.data;
-                this.getExcursionsTypes();
+                // this.getExcursionsTypes();
             })
             .catch((err) => {
                 console.log(err);
+                this.excursions = [];
             });
     },
 };

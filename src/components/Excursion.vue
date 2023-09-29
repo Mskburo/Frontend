@@ -5,23 +5,21 @@
                 :src="'/img/' + excursionObject.excursion.photo"
                 :alt="excursionObject.excursion.name"
                 class="excursion__img" />
-            <div class="header-row">
-                <div class="title-wrapper">
-                    <p class="title">{{ excursionObject.excursion.name }}</p>
-                    <p class="type">
-                        {{ excursionObject.excursion.type_name }}
-                    </p>
-                </div>
-                <div class="info">
-                    <p class="row">
-                        <img src="@/assets/img/map.svg" alt="Маршрут" />
-                        {{ excursionObject.excursion.short_route }}
-                    </p>
-                    <p class="row">
-                        <img src="@/assets/img/clock.svg" alt="Время" />
-                        {{ excursionObject.excursion.time }}
-                    </p>
-                </div>
+            <div class="title-wrapper">
+                <p class="title">{{ excursionObject.excursion.name }}</p>
+                <p class="type">
+                    {{ excursionObject.excursion.type_name }}
+                </p>
+            </div>
+            <div class="info">
+                <p class="row">
+                    <img src="@/assets/img/map.svg" alt="Маршрут" />
+                    {{ excursionObject.excursion.short_route }}
+                </p>
+                <p class="row">
+                    <img src="@/assets/img/clock.svg" alt="Время" />
+                    {{ excursionObject.excursion.time }}
+                </p>
             </div>
             <p class="description">
                 {{ excursionObject.excursion.short_description }}

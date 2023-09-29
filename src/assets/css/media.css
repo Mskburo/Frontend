@@ -44,10 +44,12 @@
 @media screen and (max-width: 901px) {
     .excursions .grid {
         justify-content: center;
+        gap: 50px 0
     }
 
     .excursion-wrapper {
-        width: 80%;
+        width: 90%;
+        padding: 0 10px;
     }
 
     .gallery img {
@@ -57,7 +59,6 @@
 
 @media screen and (max-width: 801px) {
     .about .row {
-        flex-direction: column;
         align-items: flex-start;
         gap: 10px;
     }
@@ -80,18 +81,34 @@
         width: 100%;
     }
 }
+
 @media screen and (max-width: 631px) {
     .excursion .buttons{
         flex-direction: column;
         align-items: stretch;
+        gap: 10px;
     }
     .popup-wrapper {
-        width: 90%;
+        width: 95%;
     }
+
+    .popup {
+        padding: 30px 20px;
+    }
+
+    .popup .popup__buttons{
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .popup .popup__buttons button{
+        flex: 1 1 100%;
+    }
+
     .excursion-wrapper{
         width: 100%;
     }
-    .excursion .header-row{
+    .footer .socials{
         flex-direction: column;
     }
 }
@@ -100,5 +117,19 @@
     .footer .logo {
         flex-direction: column;
         align-items: flex-start;
+    }
+    .ticket{
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+        padding: 10px;
+        border-radius: 10px;
+        border: 2px solid var(--accent-color);
+    }
+    .order-tickets{
+        gap: 10px;
+    }
+    .order-tickets.indent{
+        padding-left: 0;
     }
 }

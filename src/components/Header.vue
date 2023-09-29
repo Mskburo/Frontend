@@ -2,7 +2,7 @@
     <header class="header">
         <div class="container header__inner" :class="{ 'burger-open': isBurgerOpen }">
             <div class="header__logo">
-                <img src="@/assets/img/logo-small.png" alt="Mskburo" />
+                <img src="@/assets/img/logo.webp" alt="Mskburo" />
                 <span>Mskburo</span>
             </div>
             <div class="burger">
@@ -36,7 +36,7 @@
                             </svg>
                             Написать</a
                         >
-                        <a href="tel:+77777777777"
+                        <a href="tel:+79854346148"
                             ><svg
                                 width="20"
                                 height="20"
