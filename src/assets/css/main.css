@@ -3,7 +3,6 @@
 :root {
     --border-radius: 15px;
     --sections-gap: 120px;
-    --scrollbar-width: 12px;
 
     --dark-blue: #1B143D;
     --blue: #0073DE;
@@ -22,7 +21,7 @@
 }
 
 ::-webkit-scrollbar {
-    width: var(--scrollbar-width);
+    width: 12px;
 }
 
 ::-webkit-scrollbar-track {
@@ -115,8 +114,6 @@ a {
     align-items: center;
     justify-content: center;
 }
-
-.burger {}
 
 .header .header__logo {
     display: flex;
@@ -322,9 +319,6 @@ h2 {
     max-width: 680px;
 }
 
-.excursions {}
-
-
 .excursions h2 {
     margin-bottom: 0;
 }
@@ -463,8 +457,6 @@ h2 {
     color: #FFF;
 }
 
-.gallery {}
-
 .gallery .grid {
     display: flex;
     flex-wrap: wrap;
@@ -475,15 +467,13 @@ h2 {
     transition: 0.3s;
     flex-grow: 1;
     object-fit: cover;
-    border-radius: 15px;
+    border-radius: var(--border-radius);
     height: 300px;
 }
 
 .gallery img:hover {
     transform: scale(1.1);
 }
-
-.special {}
 
 .special p {
     color: #000;
@@ -562,6 +552,9 @@ h2 {
     font-size: 24px;
     font-weight: 400;
     transition: 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
 .footer .footer__top .column a.text:hover {
@@ -599,7 +592,7 @@ h2 {
     text-align: center;
 }
 
-.popupOpen {
+.popup-bg {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -616,18 +609,14 @@ h2 {
 }
 
 .popup-wrapper::-webkit-scrollbar-track {
-    background: #FFF;
-}
-
-.popuppopup-wrapper::-webkit-scrollbar-thumb {
-    background-color: var(--accent-color);
-    border-radius: 20px;
+    background: transparent;
 }
 
 .popup-wrapper {
     background: white;
     border-radius: var(--border-radius);
-    overflow: hidden auto;
+    overflow-y: auto;
+    overflow-x: hidden;
     max-height: 95vh;
     width: 600px;
 }
@@ -773,11 +762,18 @@ h2 {
 
 .popup .popup__close {
     position: absolute;
-    right: 15px;
-    top: 10px;
-    color: #000;
+    right: 5px;
+    top: 5px;
+    color: #FFF;
     font-size: 20px;
     font-weight: 800;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--accent-color);
+    border-radius: 12px;
 }
 
 .popup fieldset {
@@ -792,9 +788,6 @@ h2 {
     color: #000;
     font-size: 18px;
     font-weight: 400;
-}
-
-.popup .popup__p.excursionMoreDcp {
     line-height: 150%;
 }
 
@@ -814,19 +807,6 @@ h2 {
     flex-wrap: wrap;
     gap: 10px;
     padding-bottom: 10px;
-}
-
-.track::-webkit-scrollbar {
-    height: 8px;
-}
-
-.track::-webkit-scrollbar-track {
-    background: rgba(172, 172, 172, 0.30);
-}
-
-.track::-webkit-scrollbar-thumb {
-    background-color: var(--accent-color);
-    border-radius: 20px;
 }
 
 .popup .order-select-row button {
@@ -899,9 +879,10 @@ h2 {
 
 .ticket .ticket__control button {
     color: #000;
-    font-size: 16px;
+    font-size: 26px;
     font-weight: 400;
-    padding: 0 15px;
+    width: 40px;
+    height: 24px;
     display: flex;
     align-items: center;
     justify-content: center;

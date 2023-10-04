@@ -72,9 +72,12 @@
                     </div>
                 </div> -->
                 <div class="grid">
-                    <p class="red-warning" v-if="excursions.length===0">Ошибка загрузки списка экскурсий, попробуйте перезагрузить сайт</p>
+                    <p class="red-warning" v-if="excursions.length === 0">
+                        Ошибка загрузки списка экскурсий, попробуйте
+                        перезагрузить сайт
+                    </p>
                     <Excursion
-                        v-for="excursionObject in excursionsToShow"
+                        v-for="excursionObject in excursions"
                         :excursionObject="excursionObject"
                         :key="excursionObject.excursion.id"></Excursion>
                 </div>
@@ -144,8 +147,8 @@ export default {
     data() {
         return {
             // switchValue: "Все",
+            // excursionsToShow: [],
             excursions: [],
-            excursionsToShow: [],
             excursionsTypes: [],
         };
     },
@@ -167,19 +170,25 @@ export default {
         //     });
         //     this.excursionsTypes = [...new Set(result)];
         // },
+        getExcursions() {
+            axios
+                .get(`${this.$store.state.API_URL}/excursions`)
+                .then((response) => {
+                    // this.excursionsToShow = response.data;
+                    // this.getExcursionsTypes();
+                    this.excursions = response.data;
+                    setTimeout(() => {
+                        this.$store.commit("SET_PAGE_LOADED");
+                    }, 700);
+                })
+                .catch((err) => {
+                    console.log(err);
+                    this.excursions = [];
+                });
+        },
     },
     created() {
-        axios
-            .get(`${this.$store.state.API_URL}/excursions`)
-            .then((response) => {
-                this.excursions = response.data;
-                this.excursionsToShow = response.data;
-                // this.getExcursionsTypes();
-            })
-            .catch((err) => {
-                console.log(err);
-                this.excursions = [];
-            });
+        this.getExcursions()
     },
 };
 </script>

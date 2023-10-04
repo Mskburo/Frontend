@@ -3,8 +3,9 @@ import { createStore } from "vuex";
 export default createStore({
     state: {
         API_URL: process.env.VUE_APP_API_URL,
-        popupName: "",
-        popupInfo: "",
+        popupName: null,
+        popupInfo: null,
+        isPageLoaded: false,
     },
     getters: {},
     mutations: {
@@ -18,6 +19,9 @@ export default createStore({
             state.popupName = "";
             state.popupInfo = "";
         },
+        SET_PAGE_LOADED(state) {
+            state.isPageLoaded = true;
+        }
     },
     actions: {},
     modules: {},

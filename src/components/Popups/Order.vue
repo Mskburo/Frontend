@@ -1,172 +1,175 @@
 <template>
-    <form class="popup" @submit.prevent="makeRequest">
-        <button class="popup__close" @click="$emit('close')" type="button">
-            X
-        </button>
-        <div>
-            <p class="popup__title">
-                Оформление: {{ excursionInfo.excursion.name }}
-            </p>
-            <p class="popup__subtitle">Этап: {{ step }}/3</p>
-        </div>
-        <fieldset v-if="step === 1">
-            <div class="input-wrapper">
-                <label>Выберите дату:</label>
-                <input
-                    type="date"
-                    v-model="selectedDate"
-                    :min="getDateLimitation().min"
-                    required />
+    <div class="popup-wrapper">
+        <form class="popup" @submit.prevent="makeRequest">
+            <button class="popup__close" @click="$emit('close')" type="button">
+                X
+            </button>
+            <div>
+                <p class="popup__title">
+                    Оформление: {{ excursionInfo.excursion.name }}
+                </p>
+                <p class="popup__subtitle">Этап: {{ step }}/3</p>
             </div>
-            <div class="input-wrapper" v-if="selectedDate">
-                <label>Выберите время:</label>
-                <div class="order-select-row track">
-                    <button
-                        v-for="time in availableTimes"
-                        type="button"
-                        @click="selectedTime = time"
-                        :class="{ active: selectedTime === time }">
-                        <p>{{ time }}</p>
-                    </button>
-                    <p v-if="availableTimes.length === 0" class="red-warning">
-                        Нет доступного времени, выберите другую дату
-                    </p>
+            <fieldset v-if="step === 1">
+                <div class="input-wrapper">
+                    <label>Выберите дату:</label>
+                    <input
+                        type="date"
+                        v-model="selectedDate"
+                        :min="getDateLimitation().min"
+                        required />
                 </div>
-            </div>
-
-            <div class="input-wrapper" v-if="selectedTime">
-                <label>Выберите билеты:</label>
-                <div class="order-tickets indent">
-                    <div class="ticket" v-for="ticket in excursionInfo.tickets">
-                        <p class="ticket__info">
-                            {{ ticket.customers_type_name }}:<span
-                                class="dots"></span
-                            ><span>{{ ticket.cost }}₽</span>
+                <div class="input-wrapper" v-if="selectedDate">
+                    <label>Выберите время:</label>
+                    <div class="order-select-row track">
+                        <button
+                            v-for="time in availableTimes"
+                            type="button"
+                            @click="selectedTime = time"
+                            :class="{ active: selectedTime === time }">
+                            <p>{{ time }}</p>
+                        </button>
+                        <p
+                            v-if="availableTimes.length === 0"
+                            class="red-warning">
+                            Нет доступного времени, выберите другую дату
                         </p>
-                        <div class="ticket__control">
-                            <button
-                                @click="setTicket(ticket.id, -1)"
-                                type="button">
-                                -
-                            </button>
-                            <span>{{ getTicketCount(ticket.id) }}</span>
-                            <button
-                                @click="setTicket(ticket.id, 1)"
-                                type="button">
-                                +
-                            </button>
-                        </div>
                     </div>
                 </div>
-                <p class="red-warning" v-if="availableNow === null">
-                    Ошибка получения количества билетов. Попробуйте
-                    перезагрузить сайт или свяжитесь с нами через востап.
-                </p>
-                <p
-                    class="red-warning"
-                    v-if="selectedTime && availableNow !== null">
-                    {{
-                        availableNow === 0
-                            ? `Билетов не осталось`
-                            : `Осталось ${availableNow} билета(ов)`
-                    }}
-                </p>
-            </div>
-            <p class="popup__p" v-if="selectedTime">
-                <span>Итого: </span>{{ total }}₽
-            </p>
-        </fieldset>
-
-        <fieldset v-if="step === 2">
-            <div class="input-wrapper">
-                <label>Ваше имя:</label>
-                <input
-                    :class="[isNameValid ? 'valid' : 'notValid']"
-                    type="text"
-                    @keyup="checkInputsValid"
-                    v-model="name"
-                    required
-                    placeholder="Чтобы знать, как к вам обращаться" />
-            </div>
-            <div class="input-wrapper">
-                <label>Ваш телефон:</label>
-                <input
-                    :class="[isTelValid ? 'valid' : 'notValid']"
-                    type="tel"
-                    @keyup="checkInputsValid"
-                    v-model="tel"
-                    required
-                    placeholder="+7 (777) 777-77-77" />
-            </div>
-            <div class="input-wrapper">
-                <label>Ваша почта:</label>
-                <input
-                    :class="[isEmailValid ? 'valid' : 'notValid']"
-                    type="email"
-                    @keyup="checkInputsValid"
-                    v-model="email"
-                    required
-                    placeholder="На эту почту придёт чек" />
-            </div>
-        </fieldset>
-
-        <fieldset v-if="step === 3">
-            <p class="popup__p"><span>Имя: </span>{{ name }}</p>
-            <p class="popup__p"><span>Телефон: </span>{{ tel }}</p>
-            <p class="popup__p"><span>Почта: </span> {{ email }}</p>
-            <div class="input-wrapper">
-                <label>Ваш заказ:</label>
-                <div class="indent">
-                    <p class="popup__p mb10">
-                        Дата и время:
-                        {{ selectedDate.split("-").reverse().join(".") }} в
-                        {{ selectedTime }}
+                <div class="input-wrapper" v-if="selectedTime">
+                    <label>Выберите билеты:</label>
+                    <div class="order-tickets indent">
+                        <div
+                            class="ticket"
+                            v-for="ticket in excursionInfo.tickets">
+                            <p class="ticket__info">
+                                {{ ticket.customers_type_name }}:<span
+                                    class="dots"></span
+                                ><span>{{ ticket.cost }}₽</span>
+                            </p>
+                            <div class="ticket__control">
+                                <button
+                                    @click="setTicket(ticket.id, -1)"
+                                    type="button">
+                                    -
+                                </button>
+                                <span>{{ getTicketCount(ticket.id) }}</span>
+                                <button
+                                    @click="setTicket(ticket.id, 1)"
+                                    type="button">
+                                    +
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="red-warning" v-if="availableNow === null">
+                        Ошибка получения количества билетов. Попробуйте
+                        перезагрузить сайт или свяжитесь с нами через востап.
                     </p>
-                    <p class="popup__p">Билеты: {{ getOrderString() }}</p>
+                    <p
+                        class="red-warning"
+                        v-if="selectedTime && availableNow !== null">
+                        {{
+                            availableNow === 0
+                                ? `Билетов не осталось`
+                                : `Осталось ${availableNow} билета(ов)`
+                        }}
+                    </p>
                 </div>
+                <p class="popup__p" v-if="selectedTime">
+                    <span>Итого: </span>{{ total }}₽
+                </p>
+            </fieldset>
+            <fieldset v-if="step === 2">
+                <div class="input-wrapper">
+                    <label>Ваше имя:</label>
+                    <input
+                        :class="[isNameValid ? 'valid' : 'notValid']"
+                        type="text"
+                        @input="checkInputsValid"
+                        v-model="name"
+                        required
+                        placeholder="Чтобы знать, как к вам обращаться" />
+                </div>
+                <div class="input-wrapper">
+                    <label>Ваш телефон:</label>
+                    <input
+                        :class="[isTelValid ? 'valid' : 'notValid']"
+                        type="tel"
+                        @input="checkInputsValid"
+                        v-model="tel"
+                        required
+                        placeholder="+7 (777) 777-77-77" />
+                </div>
+                <div class="input-wrapper">
+                    <label>Ваша почта:</label>
+                    <input
+                        :class="[isEmailValid ? 'valid' : 'notValid']"
+                        type="email"
+                        @input="checkInputsValid"
+                        v-model="email"
+                        required
+                        placeholder="На эту почту придёт чек" />
+                </div>
+            </fieldset>
+            <fieldset v-if="step === 3">
+                <p class="popup__p"><span>Имя: </span>{{ name }}</p>
+                <p class="popup__p"><span>Телефон: </span>{{ tel }}</p>
+                <p class="popup__p"><span>Почта: </span> {{ email }}</p>
+                <div class="input-wrapper">
+                    <label>Ваш заказ:</label>
+                    <div class="indent">
+                        <p class="popup__p mb10">
+                            Дата и время:
+                            {{ selectedDate.split("-").reverse().join(".") }} в
+                            {{ selectedTime }}
+                        </p>
+                        <p class="popup__p">Билеты: {{ getOrderString() }}</p>
+                    </div>
+                </div>
+                <p class="popup__p"><span>Итого: </span>{{ total }}₽</p>
+            </fieldset>
+            <div class="popup__buttons">
+                <button
+                    class="empty"
+                    @click="step--"
+                    v-if="step !== 1"
+                    type="button">
+                    Назад
+                </button>
+                <button
+                    type="button"
+                    @click="step++"
+                    v-if="step === 1"
+                    :class="{
+                        disabled: total === 0,
+                    }">
+                    Далее
+                </button>
+                <button
+                    type="button"
+                    @click="step++"
+                    v-if="step === 2"
+                    :class="{
+                        disabled: !isInputsValid,
+                    }">
+                    Далее
+                </button>
+                <button v-if="step === 3" class="animated-btn">Оплатить</button>
             </div>
-            <p class="popup__p"><span>Итого: </span>{{ total }}₽</p>
-        </fieldset>
-        <div class="popup__buttons">
-            <button
-                class="empty"
-                @click="step--"
-                v-if="step !== 1"
-                type="button">
-                Назад
-            </button>
-            <button
-                type="button"
-                @click="step++"
-                v-if="step === 1"
-                :class="{
-                    disabled: total === 0,
-                }">
-                Далее
-            </button>
-            <button
-                type="button"
-                @click="step++"
-                v-if="step === 2"
-                :class="{
-                    disabled: !isInputsValid,
-                }">
-                Далее
-            </button>
-            <button v-if="step === 3" class="animated-btn">Оплатить</button>
-        </div>
-        <p class="popup__warning" v-if="step === 3">
-            Нажимая на кнопку, вы даете согласие на обработку персональных
-            данных и соглашаетесь с
-            <a
-                href="files/test.pdf"
-                type="application/pdf"
-                target="_blank"
-                class="blue"
-                >политикой конфиденциальности</a
-            >
-        </p>
-    </form>
+            <p class="popup__warning" v-if="step === 3">
+                Нажимая на кнопку, вы даете согласие на обработку персональных
+                данных и соглашаетесь с
+                <a
+                    href="files/test.pdf"
+                    type="application/pdf"
+                    target="_blank"
+                    class="blue"
+                    >политикой конфиденциальности</a
+                >
+            </p>
+        </form>
+    </div>
 </template>
 <script>
 import axios from "axios";
@@ -250,6 +253,7 @@ export default {
             return { min };
         },
         checkInputsValid() {
+            console.log("a");
             let validName = this.name?.length >= 2 && this.name?.length <= 20;
             let validTel =
                 this.tel?.split("").length >= 8 &&
@@ -261,11 +265,13 @@ export default {
             } else {
                 this.isNameValid = false;
             }
+
             if (validTel) {
                 this.isTelValid = true;
             } else {
                 this.isTelValid = false;
             }
+
             if (validEmail) {
                 this.isEmailValid = true;
             } else {

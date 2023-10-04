@@ -1,5 +1,5 @@
 <template>
-    <Loader :delay="3000"></Loader>
+    <Loader></Loader>
     <div>
         <Header></Header>
         <router-view></router-view>

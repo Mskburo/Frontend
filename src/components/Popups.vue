@@ -1,25 +1,17 @@
 <template>
-    <div
-        :class="{ popupOpen: !checkOpenPopup('') }"
-        @click="closePopup"
-        ref="popup_bg">
-        <div class="popup-wrapper">
-                <Special
-                    v-if="checkOpenPopup('Special')"
-                    @close="closePopup"></Special>
-                <ExcursionMore
-                    v-if="checkOpenPopup('ExcursionMore')"
-                    @close="closePopup"></ExcursionMore>
-                <Order
-                    v-if="checkOpenPopup('Order')"
-                    @close="closePopup"></Order>
+    <transition name="fade">
+        <div v-if="currentPopupView" class="popup-bg" @mousedown.self="closePopup">
+            <component
+                :is="currentPopupView"
+                @close="closePopup"></component>
         </div>
-    </div>
+    </transition>
 </template>
 <script>
 import Special from "@/components/Popups/Special.vue";
 import ExcursionMore from "@/components/Popups/ExcursionMore.vue";
 import Order from "@/components/Popups/Order.vue";
+
 
 export default {
     name: "Popups",
@@ -29,17 +21,29 @@ export default {
         Order,
     },
     data() {
-        return {};
+        return {
+            currentPopupView: null,
+        };
+    },
+    watch: {
+        "$store.state.popupName": function () {
+            this.currentPopupView = this.$store.state.popupName;
+        },
     },
     methods: {
-        checkOpenPopup(name) {
-            return this.$store.state.popupName === name;
-        },
-        closePopup(e) {
-            if (e && e.target !== this.$refs.popup_bg) return;
+        closePopup() {
             this.$store.commit("CLOSE_POPUP");
         },
     },
 };
 </script>
-=
+<style scoped>
+.fade-enter-active,
+.fade-leave-active {
+    transition: 0.5s;
+}
+.fade-enter,
+.fade-leave-to {
+    opacity: 0;
+}
+</style>
