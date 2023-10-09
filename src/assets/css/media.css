@@ -37,9 +37,11 @@
         align-items: flex-start;
         gap: 10px;
     }
-    .about .about__img{
+
+    .about .about__img {
         width: 100%;
     }
+
     .track {
         flex-wrap: wrap;
     }
@@ -55,34 +57,52 @@
     .gallery img {
         width: 100%;
     }
+
+    .popup-wrapper::-webkit-scrollbar {
+        width: 4px;
+    }
+
+    .input-wrapper input,
+    .input-wrapper textarea,
+    .popup .order-select-row button,
+    .ticket .ticket__control button {
+        border-width: 1px;
+    }
+
+    .input-wrapper input.notValid {
+        border-width: 2px;
+    }
 }
 
 @media screen and (max-width: 631px) {
-    .excursion .buttons{
+    .excursion .buttons {
         flex-direction: column;
         align-items: stretch;
         gap: 10px;
     }
+
     .popup-wrapper {
         width: 95%;
     }
+
     .popup {
         padding: 40px 20px 30px 20px;
     }
 
-    .popup .popup__buttons{
+    .popup .popup__buttons {
         flex-direction: column;
         align-items: stretch;
     }
 
-    .popup .popup__buttons button{
+    .popup .popup__buttons button {
         flex: 1 1 100%;
     }
 
-    .excursion-wrapper{
+    .excursion-wrapper {
         width: 100%;
     }
-    .footer .socials{
+
+    .footer .socials {
         flex-direction: column;
     }
 }
@@ -92,18 +112,21 @@
         flex-direction: column;
         align-items: flex-start;
     }
-    .ticket{
+
+    .ticket {
         flex-direction: column;
         align-items: flex-start;
         gap: 10px;
         padding: 10px;
         border-radius: 10px;
-        border: 2px solid var(--accent-color);
+        border: 1px solid var(--accent-color);
     }
-    .order-tickets{
+
+    .order-tickets {
         gap: 10px;
     }
-    .order-tickets.indent{
+
+    .order-tickets.indent {
         padding-left: 0;
     }
 }

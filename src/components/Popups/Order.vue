@@ -16,7 +16,9 @@
                     <input
                         type="date"
                         v-model="selectedDate"
-                        :min="getDateLimitation().min"
+                        :min="minDate"
+                        ref="dateInput"
+                        @click="this.$refs.dateInput.showPicker()"
                         required />
                 </div>
                 <div class="input-wrapper" v-if="selectedDate">
@@ -29,10 +31,8 @@
                             :class="{ active: selectedTime === time }">
                             <p>{{ time }}</p>
                         </button>
-                        <p
-                            v-if="availableTimes.length === 0"
-                            class="red-warning">
-                            Нет доступного времени, выберите другую дату
+                        <p v-if="errorMessage !== null" class="red-warning">
+                            {{ errorMessage }}
                         </p>
                     </div>
                 </div>
@@ -194,6 +194,8 @@ export default {
             isTelValid: false,
             isEmailValid: false,
             availableTimes: [],
+            minDate: null,
+            errorMessage: null,
         };
     },
     watch: {
@@ -203,6 +205,32 @@ export default {
         selectedDate(newValue, oldValue) {
             this.selectedTime = null;
             let date = new Date();
+
+            // if (this.excursionInfo.excursion.type_name === "Гибридная") {
+            //     let daysOfTheWeek = {
+            //         Mon: "Пн",
+            //         Tue: "Вт",
+            //         Wed: "Ср",
+            //         Thu: "Чт",
+            //         Fri: "Пт",
+            //         Sat: "Сб",
+            //         Sun: "Вс",
+            //     };
+            //     let availableDays = ["Сб", "Вс"];
+            //     let selectedDayOfTheWeek =
+            //         daysOfTheWeek[new Date(newValue).toString().slice(0, 3)];
+            //     let isSelectedDayOfTheWeekIsValid =
+            //         availableDays.includes(selectedDayOfTheWeek);
+
+            //     if (!isSelectedDayOfTheWeekIsValid) {
+            //         this.errorMessage =
+            //             "Выберите выходной день, в остальные дни экскурсия не проводится";
+            //         return;
+            //     } else {
+            //         this.errorMessage = null;
+            //     }
+            // }
+
             let isToday =
                 date.toLocaleDateString().split(".").reverse().join("-") ===
                 this.selectedDate;
@@ -220,12 +248,28 @@ export default {
                         currentHours >= hours && currentMinutes >= minutes
                     );
                 });
+
+                if (this.availableTimes.length === 0) {
+                    this.errorMessage =
+                        "Нет достпуных билетов на эту дату, выберите пожалуйста другую";
+                }
             } else {
+                this.errorMessage = null;
                 this.availableTimes = [...this.excursionInfo.excursion.times];
             }
         },
     },
     methods: {
+        getDateLimitation() {
+            let [year, month, day] = [
+                ...new Date().toLocaleDateString().split(".").reverse(),
+            ];
+
+            let min = `${year}-${month}-${day}`;
+            // let max = `${+year + 1}-${month}-${day}`;
+
+            this.minDate = min;
+        },
         getTicketsCount() {
             axios
                 .get(
@@ -243,17 +287,7 @@ export default {
                     this.availableLeft = null;
                 });
         },
-        getDateLimitation() {
-            let min = new Date()
-                .toLocaleDateString()
-                .split(".")
-                .reverse()
-                .join("-");
-
-            return { min };
-        },
         checkInputsValid() {
-            console.log("a");
             let validName = this.name?.length >= 2 && this.name?.length <= 20;
             let validTel =
                 this.tel?.split("").length >= 8 &&
@@ -369,6 +403,7 @@ export default {
     },
     created() {
         this.excursionInfo = this.$store.state.popupInfo;
+        this.getDateLimitation();
     },
 };
 </script>

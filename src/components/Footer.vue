@@ -45,6 +45,13 @@
                         class="text"
                         >Политика конфиденциальности</a
                     >
+                    <a
+                        href="files/CardCompanyMEB.pdf"
+                        type="application/txt"
+                        target="_blank"
+                        class="text"
+                        >Карточка компании</a
+                    >
                 </div>
             </div>
             <div class="footer__bottom">
