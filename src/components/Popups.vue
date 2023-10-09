@@ -11,6 +11,7 @@
 import Special from "@/components/Popups/Special.vue";
 import ExcursionMore from "@/components/Popups/ExcursionMore.vue";
 import Order from "@/components/Popups/Order.vue";
+import MobileMenu from "@/components/Popups/MobileMenu.vue";
 
 
 export default {
@@ -19,6 +20,7 @@ export default {
         Special,
         ExcursionMore,
         Order,
+        MobileMenu
     },
     data() {
         return {

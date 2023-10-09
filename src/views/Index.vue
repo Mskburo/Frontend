@@ -72,7 +72,7 @@
                     </div>
                 </div> -->
                 <div class="grid">
-                    <p class="red-warning" v-if="excursions.length === 0">
+                    <p class="red-warning big" v-if="excursions.length === 0">
                         Ошибка загрузки списка экскурсий, попробуйте
                         перезагрузить сайт
                     </p>
