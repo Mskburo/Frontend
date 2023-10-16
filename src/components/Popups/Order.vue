@@ -201,11 +201,13 @@ export default {
                 this.availableNow = null;
                 this.selected_tickets = {};
                 this.total = 0;
+                this.errorMessage = null;
                 this.getTicketsCount();
             }
         },
         selectedDate(newValue, oldValue) {
             this.selectedTime = null;
+            this.errorMessage = null;
             let date = new Date();
 
             // if (this.excursionInfo.excursion.type_name === "Гибридная") {
@@ -228,8 +230,6 @@ export default {
             //         this.errorMessage =
             //             "Выберите выходной день, в остальные дни экскурсия не проводится";
             //         return;
-            //     } else {
-            //         this.errorMessage = null;
             //     }
             // }
 
