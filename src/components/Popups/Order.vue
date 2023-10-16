@@ -31,12 +31,15 @@
                             :class="{ active: selectedTime === time }">
                             <p>{{ time }}</p>
                         </button>
-                        <p v-if="errorMessage !== null" class="red-warning">
+                        <p v-if="errorMessage" class="red-warning">
                             {{ errorMessage }}
                         </p>
                     </div>
                 </div>
-                <div class="input-wrapper" v-if="selectedTime">
+                <div class="tickets-loader-wrapper" v-if="selectedTime && availableNow === null">
+                    <div class="tickets-loader"></div>
+                </div>
+                <div class="input-wrapper" v-if="selectedTime && availableNow !== null">
                     <label>Выберите билеты:</label>
                     <div class="order-tickets indent">
                         <div
@@ -62,13 +65,7 @@
                             </div>
                         </div>
                     </div>
-                    <p class="red-warning" v-if="availableNow === null">
-                        Ошибка получения количества билетов. Попробуйте
-                        перезагрузить сайт или свяжитесь с нами через востап.
-                    </p>
-                    <p
-                        class="red-warning"
-                        v-if="selectedTime && availableNow !== null">
+                    <p class="red-warning">
                         {{
                             availableNow === 0
                                 ? `Билетов не осталось`
@@ -76,7 +73,7 @@
                         }}
                     </p>
                 </div>
-                <p class="popup__p" v-if="selectedTime">
+                <p class="popup__p" v-if="availableNow !== null">
                     <span>Итого: </span>{{ total }}₽
                 </p>
             </fieldset>
@@ -200,7 +197,12 @@ export default {
     },
     watch: {
         selectedTime(newValue, oldValue) {
-            if (newValue !== null) this.getTicketsCount();
+            if (newValue !== null) {
+                this.availableNow = null;
+                this.selected_tickets = {};
+                this.total = 0;
+                this.getTicketsCount();
+            }
         },
         selectedDate(newValue, oldValue) {
             this.selectedTime = null;
@@ -276,15 +278,22 @@ export default {
                     `${this.$store.state.API_URL}/excursions/?excursion_id=${this.excursionInfo.excursion.id}&time=${this.selectedTime}&date=${this.selectedDate}`
                 )
                 .then((response) => {
-                    this.availableNow =
-                        this.excursionInfo.excursion.available - response.data;
-                    this.availableLeft =
-                        this.excursionInfo.excursion.available - response.data;
+                    setTimeout(() => {
+                        this.availableNow =
+                            this.excursionInfo.excursion.available -
+                            response.data;
+                        this.availableLeft =
+                            this.excursionInfo.excursion.available -
+                            response.data;
+                    }, 500);
                 })
                 .catch((error) => {
                     console.log(error);
                     this.availableNow = null;
                     this.availableLeft = null;
+                    this.errorMessage = `Ошибка получения количества билетов на эту дату и время. Попробуйте
+                            перезагрузить сайт или свяжитесь с нами через
+                            вотсап.`;
                 });
         },
         checkInputsValid() {

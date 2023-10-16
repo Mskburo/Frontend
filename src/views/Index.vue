@@ -12,6 +12,16 @@
                     <a href="#excursions" class="hero__btn animated-btn">
                         К экскурсиям!
                     </a>
+                    <div class="flags">
+                        <img src="@/assets/img/russia.svg" alt="Россия" />
+                        <img src="@/assets/img/china.svg" alt="Китай" />
+                        <img
+                            src="@/assets/img/england.svg"
+                            alt="Великобритания" />
+                        <img src="@/assets/img/spain.svg" alt="Испания" />
+                        <img src="@/assets/img/italy.svg" alt="Италия" />
+                        <img src="@/assets/img/france.svg" alt="Франция" />
+                    </div>
                 </div>
             </div>
         </section>
@@ -188,7 +198,7 @@ export default {
         },
     },
     created() {
-        this.getExcursions()
+        this.getExcursions();
     },
 };
 </script>

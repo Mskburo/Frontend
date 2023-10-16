@@ -174,20 +174,30 @@ a {
 
 .hero {
     border-radius: 0px 0px var(--border-radius) var(--border-radius);
-    padding: 100px 0 200px 0;
+    padding: 100px 0;
     background-image: url(../img/hero-bg.webp);
     background-repeat: no-repeat;
     background-position: bottom;
     background-size: cover;
     max-width: 1920px;
-    height: 650px;
     overflow: hidden;
     margin-inline: auto;
     margin-bottom: var(--sections-gap);
 }
 
-.hero .hero__inner {
-    max-width: 590px;
+.flags {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    padding-top: 50px;
+}
+
+.flags img {
+    width: 100px;
+    border: 3px solid white;
+    border-radius: var(--border-radius);
 }
 
 .hero .top-text {
@@ -199,6 +209,7 @@ a {
 
 .hero h1 {
     color: #FFF;
+    max-width: 590px;
     font-size: 46px;
     font-weight: 700;
     line-height: 110%;
@@ -210,6 +221,7 @@ a {
     color: #FFF;
     font-size: 16px;
     font-weight: 500;
+    max-width: 590px;
     line-height: 140%;
 }
 
@@ -285,7 +297,7 @@ h2 {
 
 .about .row {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: 20px;
 }
 
@@ -840,6 +852,34 @@ h2 {
     width: 100%;
 }
 
+.tickets-loader-wrapper{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.tickets-loader {
+    width: 50px;
+    height: 50px;
+    border: 5px solid #ffffff;
+    border-bottom-color: var(--accent-color);
+    border-radius: 50%;
+    display: inline-block;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
 .ticket {
     display: flex;
     align-items: center;
@@ -983,5 +1023,4 @@ h2 {
 .mobile-menu .buttons a:hover {
     background-color: #000;
     color: #FFF;
-
 }
