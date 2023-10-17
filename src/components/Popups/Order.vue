@@ -36,10 +36,14 @@
                         </p>
                     </div>
                 </div>
-                <div class="tickets-loader-wrapper" v-if="selectedTime && availableNow === null">
+                <div
+                    class="tickets-loader-wrapper"
+                    v-if="selectedTime && availableNow === null">
                     <div class="tickets-loader"></div>
                 </div>
-                <div class="input-wrapper" v-if="selectedTime && availableNow !== null">
+                <div
+                    class="input-wrapper"
+                    v-if="selectedTime && availableNow !== null">
                     <label>Выберите билеты:</label>
                     <div class="order-tickets indent">
                         <div
@@ -64,6 +68,15 @@
                                 </button>
                             </div>
                         </div>
+                        <div class="ticket free">
+                            <p class="ticket__info">
+                                Льготный:<span class="dots"></span
+                                ><span>0 ₽</span>
+                            </p>
+                            <div class="ticket__control">
+                                <button type="button">?</button>
+                            </div>
+                        </div>
                     </div>
                     <p class="red-warning">
                         {{
@@ -74,7 +87,7 @@
                     </p>
                 </div>
                 <p class="popup__p" v-if="availableNow !== null">
-                    <span>Итого: </span>{{ total }}₽
+                    <span>Итого: </span>{{ total.toLocaleString() }}₽
                 </p>
             </fieldset>
             <fieldset v-if="step === 2">
