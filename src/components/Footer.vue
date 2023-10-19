@@ -12,8 +12,8 @@
                         ><img src="@/assets/img/phone.svg" alt="" /> +7 (985)
                         434-61-48</a
                     >
-                    <a href="mailto:mskburo@yandex.ru" class="text"
-                        ><img src="@/assets/img/mail.svg" alt="" /> mskburo@yandex.ru</a
+                    <a href="mailto:support@mskburo.ru" class="text"
+                        ><img src="@/assets/img/mail.svg" alt="" /> support@mskburo.ru</a
                     >
                 </div>
                 <div class="column">

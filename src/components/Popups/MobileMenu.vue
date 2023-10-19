@@ -47,6 +47,5 @@
 <script>
 export default {
     name: "MobileMenuPopup",
-    data() {},
 };
 </script>
