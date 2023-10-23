@@ -17,6 +17,7 @@
                         type="date"
                         v-model="selectedDate"
                         :min="minDate"
+                        :max="maxDate"
                         ref="dateInput"
                         @click="this.$refs.dateInput.showPicker()"
                         required />
@@ -74,7 +75,11 @@
                                 ><span>0 ₽</span>
                             </p>
                             <div class="ticket__control">
-                                <button type="button">?</button>
+                                <button
+                                    type="button"
+                                    @click="freeTicketRequest">
+                                    Оформить
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -205,6 +210,7 @@ export default {
             isEmailValid: false,
             availableTimes: [],
             minDate: null,
+            maxDate: null,
             errorMessage: null,
         };
     },
@@ -275,15 +281,33 @@ export default {
         },
     },
     methods: {
-        getDateLimitation() {
-            let [year, month, day] = [
-                ...new Date().toLocaleDateString().split(".").reverse(),
-            ];
+        freeTicketRequest() {
+            let url = `https://wa.me/+79104257768?text=Здравстуйте, хочу оформить льготный билет на экскурсию "${
+                this.excursionInfo.excursion.name
+            }" ${this.selectedDate.split("-").reverse().join(".")} в ${
+                this.selectedTime
+            }.`;
 
-            let min = `${year}-${month}-${day}`;
-            // let max = `${+year + 1}-${month}-${day}`;
+            window.open(url, "_blank").focus();
+
+            this.$store.commit("CLOSE_POPUP");
+        },
+        getDateLimitation() {
+            let date = new Date();
+
+            let formatDate = (string) => {
+                return string
+                    .toLocaleDateString()
+                    .split(".")
+                    .reverse()
+                    .join("-");
+            };
+
+            let min = formatDate(date);
+            let max = formatDate(new Date(date.setMonth(date.getMonth() + 1)));
 
             this.minDate = min;
+            this.maxDate = max;
         },
         getTicketsCount() {
             axios

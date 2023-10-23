@@ -10,6 +10,10 @@
             </div>
             <fieldset>
                 <p class="popup__p">
+                    <span>Доступные дни: </span
+                    >{{ excursionInfo.excursion.days ?? "Дни недели" }}
+                </p>
+                <p class="popup__p">
                     <span>Длительность: </span
                     >{{ excursionInfo.excursion.time }}
                 </p>
@@ -23,6 +27,7 @@
             </fieldset>
             <div class="popup__buttons">
                 <button
+                    v-if="excursionInfo.excursion.is_active"
                     class="animated-btn"
                     @click="
                         this.$store.commit('OPEN_POPUP', {
@@ -32,6 +37,7 @@
                     ">
                     Оформить заказ
                 </button>
+                <button v-else class="disabled">Экскурсия недоступна</button>
             </div>
         </div>
     </div>

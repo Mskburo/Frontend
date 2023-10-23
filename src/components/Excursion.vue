@@ -20,6 +20,10 @@
                     <img src="@/assets/img/clock.svg" alt="Время" />
                     {{ excursionObject.excursion.time }}
                 </p>
+                <p class="row">
+                    <img src="@/assets/img/calendar.svg" alt="Время" />
+                    {{ excursionObject.excursion?.days ?? "Дни недели" }}
+                </p>
             </div>
             <p class="description">
                 {{ excursionObject.excursion.short_description }}
@@ -36,6 +40,7 @@
                     Подробнее
                 </button>
                 <button
+                    v-if="excursionObject.excursion.is_active"
                     class="accent-btn active animated-btn"
                     @click="
                         this.$store.commit('OPEN_POPUP', {
