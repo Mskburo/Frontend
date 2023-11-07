@@ -45,7 +45,10 @@
                 <div
                     class="input-wrapper"
                     v-if="selectedTime && availableNow !== null">
-                    <label>Выберите билеты:</label>
+                    <label
+                        >Выберите билеты (максимум
+                        {{ ticketsOrderLimit }}):</label
+                    >
                     <div class="order-tickets indent">
                         <div
                             class="ticket"
@@ -61,7 +64,9 @@
                                     type="button">
                                     -
                                 </button>
-                                <span>{{ getTicketCount(ticket.id) }}</span>
+                                <span class="ticket__count">{{
+                                    getTicketCount(ticket.id)
+                                }}</span>
                                 <button
                                     @click="setTicket(ticket.id, 1)"
                                     type="button">
@@ -76,6 +81,12 @@
                             </p>
                             <div class="ticket__control">
                                 <button
+                                    class="tooltip"
+                                    type="button"
+                                    @click="freeTicketAlert">
+                                    ?
+                                </button>
+                                <button
                                     type="button"
                                     @click="freeTicketRequest">
                                     Оформить
@@ -87,7 +98,7 @@
                         {{
                             availableNow === 0
                                 ? `Билетов не осталось`
-                                : `Осталось ${availableNow} билета(ов)`
+                                : `Осталось билетов: ${availableNow}`
                         }}
                     </p>
                 </div>
@@ -194,14 +205,16 @@ export default {
     data() {
         return {
             excursionInfo: {},
+            ticketsOrderLimit: 4,
             step: 1,
             selectedDate: null,
             selectedTime: null,
-            name: null,
-            tel: null,
-            email: null,
+            name: "",
+            tel: "",
+            email: "",
             total: 0,
             selected_tickets: {},
+            totalTicketsCount: 0,
             availableNow: null,
             availableLeft: null,
             isInputsValid: false,
@@ -215,15 +228,6 @@ export default {
         };
     },
     watch: {
-        selectedTime(newValue, oldValue) {
-            if (newValue !== null) {
-                this.availableNow = null;
-                this.selected_tickets = {};
-                this.total = 0;
-                this.errorMessage = null;
-                this.getTicketsCount();
-            }
-        },
         selectedDate(newValue, oldValue) {
             this.selectedTime = null;
             this.errorMessage = null;
@@ -279,10 +283,34 @@ export default {
                 this.availableTimes = [...this.excursionInfo.excursion.times];
             }
         },
+        selectedTime(newValue, oldValue) {
+            if (newValue !== null) {
+                this.availableNow = null;
+                this.selected_tickets = {};
+                this.total = 0;
+                this.errorMessage = null;
+                this.getAvailableCount();
+            }
+        },
+        selected_tickets: {
+            handler(newValue, oldValue) {
+                let result = [0];
+                Object.values(newValue).forEach((ticketCount) => {
+                    result.push(ticketCount);
+                });
+                this.totalTicketsCount = result.reduce((a, b) => a + b);
+            },
+            deep: true,
+        },
     },
     methods: {
+        freeTicketAlert() {
+            alert(
+                `Ветераны ВОВ; Герои СССР и РФ (Золотая Звезда); Инвалиды 1 группы; Дети инвалиды; Дошкольники.\nПри себе обязательно иметь ПОДТВЕРЖДАЮЩИЙ ДОКУМЕНТ!`
+            );
+        },
         freeTicketRequest() {
-            let url = `https://wa.me/+79104257768?text=Здравстуйте, хочу оформить льготный билет на экскурсию "${
+            let url = `https://wa.me/+79854346148?text=Здравстуйте, хочу оформить льготный билет на экскурсию "${
                 this.excursionInfo.excursion.name
             }" ${this.selectedDate.split("-").reverse().join(".")} в ${
                 this.selectedTime
@@ -309,7 +337,7 @@ export default {
             this.minDate = min;
             this.maxDate = max;
         },
-        getTicketsCount() {
+        getAvailableCount() {
             axios
                 .get(
                     `${this.$store.state.API_URL}/excursions/?excursion_id=${this.excursionInfo.excursion.id}&time=${this.selectedTime}&date=${this.selectedDate}`
@@ -334,45 +362,44 @@ export default {
                 });
         },
         checkInputsValid() {
-            let validName = this.name?.length >= 2 && this.name?.length <= 20;
-            let validTel =
-                this.tel?.split("").length >= 8 &&
-                this.tel?.split("").length <= 20;
+            let nameLength = this.name.length;
+            let telLength = this.tel.length;
+
+            let validName = nameLength >= 2 && nameLength <= 20;
+            let validTel = telLength >= 8 && telLength <= 20;
             let validEmail = /^.+@.+\..+/.test(this.email);
 
-            if (validName) {
-                this.isNameValid = true;
-            } else {
-                this.isNameValid = false;
-            }
+            let checkValidate = (variableName, validationСondition) => {
+                if (validationСondition) {
+                    this[variableName] = true;
+                } else {
+                    this[variableName] = false;
+                }
+            };
 
-            if (validTel) {
-                this.isTelValid = true;
-            } else {
-                this.isTelValid = false;
-            }
+            checkValidate("isNameValid", validName);
+            checkValidate("isTelValid", validTel);
+            checkValidate("isEmailValid", validEmail);
 
-            if (validEmail) {
-                this.isEmailValid = true;
-            } else {
-                this.isEmailValid = false;
-            }
+            let validAll =
+                this.isNameValid && this.isTelValid && this.isEmailValid;
 
-            if (this.isNameValid && this.isTelValid && this.isEmailValid) {
-                this.isInputsValid = true;
-            } else {
-                this.isInputsValid = false;
-            }
+            checkValidate("isInputsValid", validAll);
         },
-        setTicket(id, count) {
-            if (this.availableNow === 0 && count > 0) return;
-            let newCount = this.getTicketCount(id) + count;
-            if (newCount <= 0) {
+        setTicket(id, addValue) {
+            if (this.availableNow === 0 && addValue > 0) return;
+            let newCount = this.getTicketCount(id) + addValue;
+            if (newCount > 0) {
+                let isCanAdd =
+                    addValue > 0 &&
+                    this.totalTicketsCount >= this.ticketsOrderLimit;
+
+                if (isCanAdd) return;
+
+                this.selected_tickets[id] = newCount;
+            } else {
                 delete this.selected_tickets[id];
-                this.calcTotal();
-                return;
             }
-            this.selected_tickets[id] = newCount;
             this.calcTotal();
         },
         calcTotal() {

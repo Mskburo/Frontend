@@ -12,16 +12,6 @@
                     <a href="#excursions" class="hero__btn animated-btn">
                         К экскурсиям!
                     </a>
-                    <div class="flags">
-                        <img src="@/assets/img/russia.svg" alt="Россия" />
-                        <img src="@/assets/img/china.svg" alt="Китай" />
-                        <img
-                            src="@/assets/img/england.svg"
-                            alt="Великобритания" />
-                        <img src="@/assets/img/spain.svg" alt="Испания" />
-                        <img src="@/assets/img/italy.svg" alt="Италия" />
-                        <img src="@/assets/img/france.svg" alt="Франция" />
-                    </div>
                 </div>
             </div>
         </section>
@@ -60,6 +50,40 @@
                                 гостей.
                             </p>
                         </div>
+                        <div class="row">
+                            <div class="num">04</div>
+                            <div class="about-flags">
+                                <p class="text">
+                                    Мы проводим экскурсии на следующих языках:
+                                </p>
+                                <div class="flags">
+                                    <img
+                                        src="@/assets/img/russia.svg"
+                                        loading="lazy"
+                                        alt="Россия" />
+                                    <img
+                                        src="@/assets/img/china.svg"
+                                        loading="lazy"
+                                        alt="Китай" />
+                                    <img
+                                        src="@/assets/img/england.svg"
+                                        loading="lazy"
+                                        alt="Великобритания" />
+                                    <img
+                                        src="@/assets/img/spain.svg"
+                                        loading="lazy"
+                                        alt="Испания" />
+                                    <img
+                                        src="@/assets/img/italy.svg"
+                                        loading="lazy"
+                                        alt="Италия" />
+                                    <img
+                                        src="@/assets/img/france.svg"
+                                        loading="lazy"
+                                        alt="Франция" />
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <img src="@/assets/img/about.webp" alt="" class="about__img" />
@@ -95,12 +119,30 @@
             <section class="gallery" id="gallery">
                 <h2>Галерея</h2>
                 <div class="grid">
-                    <img src="@/assets/img/gallery1.webp" alt="Галлерея1" />
-                    <img src="@/assets/img/gallery2.webp" alt="Галлерея2" />
-                    <img src="@/assets/img/gallery3.webp" alt="Галлерея3" />
-                    <img src="@/assets/img/gallery4.webp" alt="Галлерея4" />
-                    <img src="@/assets/img/gallery5.webp" alt="Галлерея5" />
-                    <img src="@/assets/img/gallery6.webp" alt="Галлерея6" />
+                    <img
+                        src="@/assets/img/gallery1.webp"
+                        alt="Галлерея1"
+                        loading="lazy" />
+                    <img
+                        src="@/assets/img/gallery2.webp"
+                        alt="Галлерея2"
+                        loading="lazy" />
+                    <img
+                        src="@/assets/img/gallery3.webp"
+                        alt="Галлерея3"
+                        loading="lazy" />
+                    <img
+                        src="@/assets/img/gallery4.webp"
+                        alt="Галлерея4"
+                        loading="lazy" />
+                    <img
+                        src="@/assets/img/gallery5.webp"
+                        alt="Галлерея5"
+                        loading="lazy" />
+                    <img
+                        src="@/assets/img/gallery6.webp"
+                        alt="Галлерея6"
+                        loading="lazy" />
                 </div>
             </section>
             <section class="special" id="special">

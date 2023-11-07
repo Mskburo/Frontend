@@ -10,6 +10,9 @@
 }
 
 @media screen and (max-width: 1201px) {
+    .hero {
+        padding-left: 50px;
+    }
     .about .about__img {
         width: 60%;
         height: unset;
@@ -34,7 +37,7 @@
 
 @media screen and (max-width: 801px) {
     .hero {
-        padding: 50px 0;
+        padding: 50px 0 50px 20px;
     }
     .flags img {
         width: 80px;
@@ -86,6 +89,19 @@
         gap: 10px;
     }
 
+    .special button{
+        padding: 20px;
+        font-size: 20px;
+    }
+
+    .mobile-menu .popup{
+        gap: 15px;
+    }
+
+    .mobile-menu nav{
+        gap: 10px;
+    }
+
     .popup-wrapper {
         width: 95%;
     }
@@ -113,6 +129,9 @@
 }
 
 @media screen and (max-width: 501px) {
+    .hero {
+        padding-left: 10px;
+    }
     .footer .logo {
         flex-direction: column;
         align-items: flex-start;

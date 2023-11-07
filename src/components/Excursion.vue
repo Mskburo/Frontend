@@ -1,6 +1,6 @@
 <template>
     <div class="excursion-wrapper">
-        <div class="excursion">
+        <article class="excursion">
             <img
                 :src="'/img/' + excursionObject.excursion.photo"
                 :alt="excursionObject.excursion.name"
@@ -51,7 +51,7 @@
                     Записаться
                 </button>
             </div>
-        </div>
+        </article>
     </div>
 </template>
 <script>
