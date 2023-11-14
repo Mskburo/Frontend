@@ -2,6 +2,7 @@
     <header class="header">
         <div class="container header__inner">
             <div class="header__logo">
+                <a href="/#hero" class="absolute-link"></a>
                 <img src="@/assets/img/logo.webp" alt="Mskburo" />
                 <span>Mskburo</span>
             </div>

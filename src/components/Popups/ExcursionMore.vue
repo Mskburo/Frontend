@@ -3,36 +3,36 @@
         <div class="popup">
             <button class="popup__close" @click="$emit('close')">X</button>
             <div>
-                <p class="popup__title">{{ excursionInfo.excursion.name }}</p>
+                <p class="popup__title">{{ excursion_name }}</p>
                 <p class="popup__subtitle">
-                    {{ excursionInfo.excursion.type_name }}
+                    {{ excursion_type_name }}
                 </p>
             </div>
             <fieldset>
                 <p class="popup__p">
                     <span>Доступные дни: </span
-                    >{{ excursionInfo.excursion.days ?? "Дни недели" }}
+                    >{{ excursion_week_days }}
                 </p>
                 <p class="popup__p">
                     <span>Длительность: </span
-                    >{{ excursionInfo.excursion.time }}
+                    >{{ excursion_time }}
                 </p>
                 <p class="popup__p">
-                    <span>Маршрут: </span>{{ excursionInfo.excursion.route }}
+                    <span>Маршрут: </span>{{ excursion_route }}
                 </p>
                 <p class="popup__p">
                     <span>Подробное описание: </span
-                    >{{ excursionInfo.excursion.description }}
+                    >{{ excursion_description }}
                 </p>
             </fieldset>
             <div class="popup__buttons">
                 <button
-                    v-if="excursionInfo.excursion.is_active"
+                    v-if="excursion_is_active"
                     class="animated-btn"
                     @click="
                         this.$store.commit('OPEN_POPUP', {
                             name: 'Order',
-                            info: excursionInfo,
+                            info: this.$store.state.popupInfo,
                         })
                     ">
                     Оформить заказ
@@ -45,16 +45,29 @@
 <script>
 export default {
     name: "ExcursionMorePopup",
-    data() {
-        return {
-            excursionInfo: {},
-        };
-    },
-    methods: {
-        makeRequest() {},
-    },
-    created() {
-        this.excursionInfo = this.$store.state.popupInfo;
+    computed: {
+        excursion_name() {
+            return this.$store.state.popupInfo.excursion.name;
+        },
+        excursion_type_name() {
+            return this.$store.state.popupInfo.excursion.type_name;
+        },
+        excursion_time() {
+            return this.$store.state.popupInfo.excursion.time;
+        },
+        excursion_route() {
+            return this.$store.state.popupInfo.excursion.route;
+        },
+        excursion_week_days() {
+            let days = this.$store.state.popupInfo.excursion.week_days;
+            return this.$store.getters.getWeekendDays(days);
+        },
+        excursion_description() {
+            return this.$store.state.popupInfo.excursion.description;
+        },
+        excursion_is_active() {
+            return this.$store.state.popupInfo.excursion.is_active;
+        },
     },
 };
 </script>

@@ -24,7 +24,10 @@
                 </div>
                 <div class="input-wrapper" v-if="selectedDate">
                     <label>Выберите время:</label>
-                    <div class="order-select-row track">
+                    <p v-if="errorMessage" class="red-warning">
+                        {{ errorMessage }}
+                    </p>
+                    <div class="order-select-row track" v-else>
                         <button
                             v-for="time in availableTimes"
                             type="button"
@@ -32,9 +35,6 @@
                             :class="{ active: selectedTime === time }">
                             <p>{{ time }}</p>
                         </button>
-                        <p v-if="errorMessage" class="red-warning">
-                            {{ errorMessage }}
-                        </p>
                     </div>
                 </div>
                 <div
@@ -233,28 +233,25 @@ export default {
             this.errorMessage = null;
             let date = new Date();
 
-            // if (this.excursionInfo.excursion.type_name === "Гибридная") {
-            //     let daysOfTheWeek = {
-            //         Mon: "Пн",
-            //         Tue: "Вт",
-            //         Wed: "Ср",
-            //         Thu: "Чт",
-            //         Fri: "Пт",
-            //         Sat: "Сб",
-            //         Sun: "Вс",
-            //     };
-            //     let availableDays = ["Сб", "Вс"];
-            //     let selectedDayOfTheWeek =
-            //         daysOfTheWeek[new Date(newValue).toString().slice(0, 3)];
-            //     let isSelectedDayOfTheWeekIsValid =
-            //         availableDays.includes(selectedDayOfTheWeek);
+            let daysOfTheWeek = {
+                Mon: "Пн",
+                Tue: "Вт",
+                Wed: "Ср",
+                Thu: "Чт",
+                Fri: "Пт",
+                Sat: "Сб",
+                Sun: "Вс",
+            };
+            let excursion_week_days = this.excursionInfo.excursion.week_days;
+            let availableDays = this.$store.getters
+                .getWeekendDays(excursion_week_days);
+            let selectedDayOfTheWeek =
+                daysOfTheWeek[new Date(newValue).toString().slice(0, 3)];
 
-            //     if (!isSelectedDayOfTheWeekIsValid) {
-            //         this.errorMessage =
-            //             "Выберите выходной день, в остальные дни экскурсия не проводится";
-            //         return;
-            //     }
-            // }
+            if (!availableDays.split(", ").includes(selectedDayOfTheWeek)) {
+                this.errorMessage = `Выберите один из следующий дней: ${availableDays}; в остальные дни экскурсия не проводится`;
+                return;
+            }
 
             let isToday =
                 date.toLocaleDateString().split(".").reverse().join("-") ===
