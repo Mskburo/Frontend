@@ -123,6 +123,7 @@
                         :class="[isTelValid ? 'valid' : 'notValid']"
                         type="tel"
                         @input="checkInputsValid"
+                        inputmode="numeric"
                         v-model="tel"
                         required
                         placeholder="+7 (777) 777-77-77" />
@@ -463,11 +464,13 @@ export default {
                     },
                     {}
                 )
+                .then(response => {
+                    window.history.pushState({}, "", new URL(location));
+                    window.location.replace(response.data)
+                })
                 .catch((error) => {
-                    if (error.response.status === 307) {
-                        document.location.replace(error.response.data);
-                    }
                     console.log(error);
+                    alert(`Ошибка оформления заказа №${error.response.status}`)
                 });
         },
     },

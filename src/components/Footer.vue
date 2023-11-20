@@ -8,9 +8,8 @@
             <div class="footer__top">
                 <div class="column">
                     <p class="title">Контакты</p>
-                    <a href="tel:+79854346148" class="text"
-                        ><img src="@/assets/img/phone.svg" loading="lazy" alt="" /> +7 (985)
-                        434-61-48</a
+                    <a href="tel:88004442137" class="text"
+                        ><img src="@/assets/img/phone.svg" loading="lazy" alt="" /> 8 (800) 444-21-37</a
                     >
                     <a href="mailto:support@mskburo.ru" class="text"
                         ><img src="@/assets/img/mail.svg" loading="lazy" alt="" /> support@mskburo.ru</a
