@@ -182,7 +182,12 @@
                     }">
                     Далее
                 </button>
-                <button v-if="step === 3" class="animated-btn">Оплатить</button>
+                <button
+                    v-if="step === 3"
+                    type="submit"
+                    :class="[isPayBtnDisabled ? 'disabled' : 'animated-btn']">
+                    {{ isPayBtnDisabled ? 'Ожидание оплаты...' : 'Оплатить' }}
+                </button>
             </div>
             <p class="popup__warning" v-if="step === 3">
                 Нажимая на кнопку, вы даете согласие на обработку персональных
@@ -226,6 +231,7 @@ export default {
             minDate: null,
             maxDate: null,
             errorMessage: null,
+            isPayBtnDisabled: false,
         };
     },
     watch: {
@@ -244,8 +250,8 @@ export default {
                 Sun: "Вс",
             };
             let excursion_week_days = this.excursionInfo.excursion.week_days;
-            let availableDays = this.$store.getters
-                .getWeekendDays(excursion_week_days);
+            let availableDays =
+                this.$store.getters.getWeekendDays(excursion_week_days);
             let selectedDayOfTheWeek =
                 daysOfTheWeek[new Date(newValue).toString().slice(0, 3)];
 
@@ -438,6 +444,8 @@ export default {
             return result.join(", ");
         },
         makeRequest() {
+            this.isPayBtnDisabled = true;
+
             let tickets = [];
             Object.entries(this.selected_tickets).forEach((ticketInfo) => {
                 tickets.push({
@@ -464,13 +472,13 @@ export default {
                     },
                     {}
                 )
-                .then(response => {
+                .then((response) => {
                     window.history.pushState({}, "", new URL(location));
-                    window.location.replace(response.data)
+                    window.location.replace(response.data);
                 })
                 .catch((error) => {
                     console.log(error);
-                    alert(`Ошибка оформления заказа №${error.response.status}`)
+                    alert(`Ошибка оформления заказа №${error.response.status}`);
                 });
         },
     },
