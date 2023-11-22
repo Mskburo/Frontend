@@ -186,7 +186,7 @@
                     v-if="step === 3"
                     type="submit"
                     :class="[isPayBtnDisabled ? 'disabled' : 'animated-btn']">
-                    {{ isPayBtnDisabled ? 'Ожидание оплаты...' : 'Оплатить' }}
+                    {{ isPayBtnDisabled ? 'Ожидайте...' : 'Оплатить' }}
                 </button>
             </div>
             <p class="popup__warning" v-if="step === 3">
@@ -478,7 +478,11 @@ export default {
                 })
                 .catch((error) => {
                     console.log(error);
-                    alert(`Ошибка оформления заказа №${error.response.status}`);
+                    if (error.code === "ERR_NETWORK") {
+                        alert(`Ошибка оформления заказа сейчас произойдет перезагрузка, попробуйте снова. При неудаче напишите нам в востап`);
+                        window.location.replace('https://mskburo.ru');
+                    }
+                    alert(`Ошибка оформления заказа №${error?.response?.status ?? 'CORS'}`);
                 });
         },
     },
