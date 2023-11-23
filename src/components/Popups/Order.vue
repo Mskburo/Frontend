@@ -211,7 +211,7 @@ export default {
     data() {
         return {
             excursionInfo: {},
-            ticketsOrderLimit: 4,
+            ticketsOrderLimit: 5,
             step: 1,
             selectedDate: null,
             selectedTime: null,
@@ -478,11 +478,12 @@ export default {
                 })
                 .catch((error) => {
                     console.log(error);
-                    if (error.code === "ERR_NETWORK") {
+                    if (error?.code === "ERR_NETWORK") {
                         alert(`Ошибка оформления заказа сейчас произойдет перезагрузка, попробуйте снова. При неудаче напишите нам в востап`);
                         window.location.replace('https://mskburo.ru');
+                        return
                     }
-                    alert(`Ошибка оформления заказа №${error?.response?.status ?? 'CORS'}`);
+                    alert(`Ошибка оформления заказа №${error.response.status}`);
                 });
         },
     },

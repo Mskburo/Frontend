@@ -108,7 +108,7 @@ a {
     position: relative;
 }
 
-.absolute-link{
+.absolute-link {
     position: absolute;
     top: 0;
     left: 0;
@@ -298,7 +298,7 @@ h2 {
     margin-bottom: 40px;
 }
 
-.blue {
+.accent-mark {
     color: var(--accent-color);
 }
 
@@ -320,6 +320,7 @@ h2 {
     text-align: right;
     color: #000;
     font-size: 40px;
+    line-height: 110%;
     font-weight: 400;
 }
 
@@ -329,6 +330,10 @@ h2 {
     font-weight: 400;
     line-height: 140%;
     max-width: 680px;
+}
+
+.about .about__img {
+    border-radius: var(--border-radius);
 }
 
 .excursions h2 {
@@ -494,6 +499,41 @@ h2 {
 
 .gallery img:hover {
     transform: scale(1.05);
+}
+
+.faq .faq-list {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 20px;
+}
+
+.faq details {
+    display: block;
+    border-radius: var(--border-radius);
+    border: 2px solid var(--accent-color);
+    overflow: hidden;
+    cursor: pointer;
+    padding: 20px;
+}
+
+.faq summary {
+    font-size: 20px;
+    cursor: pointer;
+    user-select: none;
+    font-weight: bold;
+}
+
+.faq details p {
+    font-size: 20px;
+    padding: 0px 20px;
+    margin-top: 10px;
+    opacity: 0;
+    transition: opacity 0.5s;
+}
+
+.faq details[open] p {
+    opacity: 1;
 }
 
 .special p {

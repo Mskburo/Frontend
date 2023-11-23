@@ -2,17 +2,28 @@
     <footer class="footer" id="footer">
         <div class="container footer__inner">
             <div class="logo">
-                <img src="@/assets/img/logo.webp" loading="lazy" alt="MskBuro" />
+                <img
+                    src="@/assets/img/logo.webp"
+                    loading="lazy"
+                    alt="MskBuro" />
                 <span class="text">ООО “Московское экскурсионное бюро”</span>
             </div>
             <div class="footer__top">
                 <div class="column">
                     <p class="title">Контакты</p>
                     <a href="tel:88004442137" class="text"
-                        ><img src="@/assets/img/phone.svg" loading="lazy" alt="" /> 8 (800) 444-21-37</a
+                        ><img
+                            src="@/assets/img/phone.svg"
+                            loading="lazy"
+                            alt="" />
+                        8 (800) 444-21-37</a
                     >
                     <a href="mailto:support@mskburo.ru" class="text"
-                        ><img src="@/assets/img/mail.svg" loading="lazy" alt="" /> support@mskburo.ru</a
+                        ><img
+                            src="@/assets/img/mail.svg"
+                            loading="lazy"
+                            alt="" />
+                        support@mskburo.ru</a
                     >
                 </div>
                 <div class="column">
@@ -62,14 +73,20 @@
             </div>
             <div class="footer__bottom">
                 <div class="socials">
-                    <a href="https://vk.com/moseksburo"
-                        ><img src="@/assets/img/qr-vk.svg" loading="lazy" alt="ВКонтакте"
+                    <a href="https://vk.com/moseksburo" target="_blank"
+                        ><img
+                            src="@/assets/img/qr-vk.svg"
+                            loading="lazy"
+                            alt="ВКонтакте"
                     /></a>
                     <!-- <a href="http://"
                         ><img src="@/assets/img/tg.svg" alt="Телеграм"
                     /></a> -->
-                    <a href="https://wa.me/79854346148"
-                        ><img src="@/assets/img/qr-whatsapp.svg" loading="lazy" alt="Вотсап"
+                    <a href="https://wa.me/79854346148" target="_blank"
+                        ><img
+                            src="@/assets/img/qr-whatsapp.svg"
+                            loading="lazy"
+                            alt="Вотсап"
                     /></a>
                 </div>
                 <p class="copyright">

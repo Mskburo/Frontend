@@ -6,11 +6,12 @@
             </button>
             <p class="popup__title">Меню</p>
             <nav>
-                <a href="/#hero" @click="$emit('close')">Главная</a>
+                <!-- <a href="/#hero" @click="$emit('close')">Главная</a> -->
                 <a href="/#about" @click="$emit('close')">О нас</a>
                 <a href="/#excursions" @click="$emit('close')">Экскурсии</a>
                 <a href="/#gallery" @click="$emit('close')">Галерея</a>
-                <a href="/#special" @click="$emit('close')">Спец. экскурсии</a>
+                <a href="/#faq" @click="$emit('close')">Вопрос-ответ</a>
+                <!-- <a href="/#special" @click="$emit('close')">Спец. экскурсии</a> -->
                 <a href="/#footer" @click="$emit('close')">Контакты</a>
             </nav>
             <div class="buttons">
