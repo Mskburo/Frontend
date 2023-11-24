@@ -186,20 +186,28 @@
                     v-if="step === 3"
                     type="submit"
                     :class="[isPayBtnDisabled ? 'disabled' : 'animated-btn']">
-                    {{ isPayBtnDisabled ? 'Ожидайте...' : 'Оплатить' }}
+                    {{ isPayBtnDisabled ? "Ожидайте..." : "Оплатить" }}
                 </button>
             </div>
-            <p class="popup__warning" v-if="step === 3">
-                Нажимая на кнопку, вы даете согласие на обработку персональных
-                данных и соглашаетесь с
-                <a
-                    href="files/test.pdf"
-                    type="application/pdf"
-                    target="_blank"
-                    class="blue"
-                    >политикой конфиденциальности</a
-                >
-            </p>
+            <div v-if="step === 3" class="popup__warning-wrapper">
+                <p class="popup__warning">
+                    Нажимая на кнопку, вы даете согласие на обработку
+                    персональных данных и соглашаетесь с
+                    <a
+                        href="files/test.pdf"
+                        type="application/pdf"
+                        target="_blank"
+                        class="blue"
+                        >политикой конфиденциальности</a
+                    >
+                </p>
+                <p class="popup__warning">
+                    ВНИМАНИЕ! При оформлении билета для студента, пенсионера,
+                    многодетного или любого другого льготного билета при себе
+                    необходимо иметь подтверждающий документ на льготу
+                    (пенсионное, студентческий билет и т.д. соответственно.)
+                </p>
+            </div>
         </form>
     </div>
 </template>
@@ -280,7 +288,7 @@ export default {
 
                 if (this.availableTimes.length === 0) {
                     this.errorMessage =
-                        "Нет достпуных билетов на эту дату, выберите пожалуйста другую";
+                        "Нет достпуных билетов на эту дату, выберите пожалуйста другую или напишите нам на WhatsApp, мы поможем с выбором!";
                 }
             } else {
                 this.errorMessage = null;
@@ -362,7 +370,7 @@ export default {
                     this.availableLeft = null;
                     this.errorMessage = `Ошибка получения количества билетов на эту дату и время. Попробуйте
                             перезагрузить сайт или свяжитесь с нами через
-                            вотсап.`;
+                            WhatsApp.`;
                 });
         },
         checkInputsValid() {
@@ -370,7 +378,7 @@ export default {
             let telLength = this.tel.length;
 
             let validName = nameLength >= 2 && nameLength <= 20;
-            let validTel = telLength >= 8 && telLength <= 20;
+            let validTel = telLength >= 11 && telLength <= 18;
             let validEmail = /^.+@.+\..+/.test(this.email);
 
             let checkValidate = (variableName, validationСondition) => {
@@ -479,9 +487,11 @@ export default {
                 .catch((error) => {
                     console.log(error);
                     if (error?.code === "ERR_NETWORK") {
-                        alert(`Ошибка оформления заказа сейчас произойдет перезагрузка, попробуйте снова. При неудаче напишите нам в востап`);
-                        window.location.replace('https://mskburo.ru');
-                        return
+                        alert(
+                            `Ошибка оформления заказа сейчас произойдет перезагрузка, попробуйте снова. При неудаче напишите нам в востап`
+                        );
+                        window.location.replace("https://mskburo.ru");
+                        return;
                     }
                     alert(`Ошибка оформления заказа №${error.response.status}`);
                 });
@@ -493,3 +503,16 @@ export default {
     },
 };
 </script>
+
+<style scoped>
+.popup__warning-wrapper{
+    margin-top: -20px;
+}
+.popup__warning {
+    margin-bottom: 10px;
+}
+
+.popup__warning:last-child{
+    color: red;
+}
+</style>
