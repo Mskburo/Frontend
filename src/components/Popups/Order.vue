@@ -245,6 +245,7 @@ export default {
     watch: {
         selectedDate(newValue, oldValue) {
             this.selectedTime = null;
+            this.availableNow = null;
             this.errorMessage = null;
             let date = new Date();
 
@@ -505,10 +506,8 @@ export default {
 </script>
 
 <style scoped>
-.popup__warning-wrapper{
-    margin-top: -20px;
-}
 .popup__warning {
+    margin-top: 0 !important;
     margin-bottom: 10px;
 }
 

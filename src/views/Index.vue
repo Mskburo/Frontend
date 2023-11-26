@@ -226,7 +226,7 @@ export default {
             // switchValue: "Все",
             // excursionsToShow: [],
             excursions: [],
-            excursionsTypes: [],
+            // excursionsTypes: [],
         };
     },
     methods: {

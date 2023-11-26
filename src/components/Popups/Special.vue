@@ -61,7 +61,7 @@ export default {
     },
     methods: {
         makeRequest() {
-            let url = `https://wa.me/+79104257768?text=Здравстуйте, меня зовут ${this.name}. Хочу заказать индивидуальную экскурсию. Комментарий: ${this.text}`;
+            let url = `https://wa.me/79854346148?text=Здравстуйте, меня зовут ${this.name}. Хочу заказать индивидуальную экскурсию. Комментарий: ${this.text}`;
 
             window.open(url, "_blank").focus();
 
