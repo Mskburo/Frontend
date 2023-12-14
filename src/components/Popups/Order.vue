@@ -487,13 +487,6 @@ export default {
                 })
                 .catch((error) => {
                     console.log(error);
-                    if (error?.code === "ERR_NETWORK") {
-                        alert(
-                            `Ошибка оформления заказа сейчас произойдет перезагрузка, попробуйте снова. При неудаче напишите нам в востап`
-                        );
-                        window.location.replace("https://mskburo.ru");
-                        return;
-                    }
                     alert(`Ошибка оформления заказа №${error.response.status}`);
                 });
         },
@@ -513,5 +506,11 @@ export default {
 
 .popup__warning:last-child{
     color: red;
+}
+
+input[type="date"]::-webkit-inner-spin-button,
+input[type="date"]::-webkit-calendar-picker-indicator {
+    display: none;
+    -webkit-appearance: none;
 }
 </style>

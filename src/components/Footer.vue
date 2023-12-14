@@ -35,27 +35,6 @@
                 <div class="column">
                     <p class="title">Документы</p>
                     <a
-                        href="files/test.pdf"
-                        type="application/pdf"
-                        target="_blank"
-                        class="text"
-                        >Публичная оферта</a
-                    >
-                    <a
-                        href="files/test.pdf"
-                        type="application/txt"
-                        target="_blank"
-                        class="text"
-                        >Пользовательское соглашение</a
-                    >
-                    <a
-                        href="files/test.pdf"
-                        type="application/txt"
-                        target="_blank"
-                        class="text"
-                        >Политика конфиденциальности</a
-                    >
-                    <a
                         href="files/CardCompanyMEB.pdf"
                         type="application/txt"
                         target="_blank"
@@ -63,11 +42,46 @@
                         >Карточка компании</a
                     >
                     <a
-                        href="files/test.pdf"
+                        href="files/PreferentialTariffs.pdf"
                         type="application/txt"
                         target="_blank"
                         class="text"
-                        >Условия возврата</a
+                        >Льготные тарифы</a
+                    >
+                    <a
+                        href="files/PublicOffer.pdf"
+                        type="application/txt"
+                        target="_blank"
+                        class="text"
+                        >Публичная оферта</a
+                    >
+                    <a
+                        href="files/UserAgreement.pdf"
+                        type="application/txt"
+                        target="_blank"
+                        class="text"
+                        >Пользовательское соглашение</a
+                    >
+                    <a
+                        href="files/PersonalData.pdf"
+                        type="application/txt"
+                        target="_blank"
+                        class="text"
+                        >Обработка персональных данных</a
+                    >
+                    <a
+                        href="files/PrivacyPolicy.pdf"
+                        type="application/txt"
+                        target="_blank"
+                        class="text"
+                        >Политика конфиденциальности</a
+                    >
+                    <a
+                        href="files/TouristsRules.pdf"
+                        type="application/txt"
+                        target="_blank"
+                        class="text"
+                        >Правила поведения туристов</a
                     >
                 </div>
             </div>

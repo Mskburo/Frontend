@@ -86,7 +86,7 @@
                         </div>
                     </div>
                 </div>
-                <img src="@/assets/img/about.jpeg" alt="" class="about__img" />
+                <img src="@/assets/img/about.webp" alt="" class="about__img" />
             </section>
             <section class="excursions" id="excursions">
                 <h2>Экскурсии</h2>
@@ -120,10 +120,6 @@
                 <h2>Галерея</h2>
                 <div class="grid">
                     <img
-                        src="@/assets/img/gallery1.webp"
-                        alt="Галлерея1"
-                        loading="lazy" />
-                    <img
                         src="@/assets/img/gallery2.webp"
                         alt="Галлерея2"
                         loading="lazy" />
@@ -132,16 +128,20 @@
                         alt="Галлерея3"
                         loading="lazy" />
                     <img
-                        src="@/assets/img/gallery4.webp"
-                        alt="Галлерея4"
-                        loading="lazy" />
-                    <img
                         src="@/assets/img/gallery5.webp"
                         alt="Галлерея5"
                         loading="lazy" />
                     <img
-                        src="@/assets/img/gallery6.webp"
-                        alt="Галлерея6"
+                        src="@/assets/img/gallery7.jpeg"
+                        alt="Галлерея7"
+                        loading="lazy" />
+                    <img
+                        src="@/assets/img/gallery10.jpg"
+                        alt="Галлерея10"
+                        loading="lazy" />
+                    <img
+                        src="@/assets/img/gallery9.webp"
+                        alt="Галлерея9"
                         loading="lazy" />
                 </div>
             </section>
@@ -165,8 +165,8 @@
                             Мы постоянно работаем над улучшением и расширением
                             списка экскурсий, однако бывает такое, что желаемой
                             экскурсии нет. В таком случае вы можете уточнить
-                            дополнительную информацию по телефону/в месседжере
-                            или заказать индивидуальную экскурсию
+                            дополнительную информацию по телефону или заказать
+                            индивидуальную экскурсию
                         </p>
                     </details>
                     <details>
