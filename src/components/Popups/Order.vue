@@ -194,7 +194,7 @@
                     Нажимая на кнопку, вы даете согласие на обработку
                     персональных данных и соглашаетесь с
                     <a
-                        href="files/test.pdf"
+                        href="files/PrivacyPolicy.pdf"
                         type="application/pdf"
                         target="_blank"
                         class="blue"
