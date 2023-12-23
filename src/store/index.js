@@ -6,6 +6,9 @@ export default createStore({
         popupName: null,
         popupInfo: null,
         isPageLoaded: false,
+        tel: "8 (800) 444-21-37",
+        email: "support@mskburo.ru",
+        whatsappLink: "https://wa.me/79854346148",
         weekendDays: {
             1: {
                 eng_day: 'Mon',

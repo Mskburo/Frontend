@@ -515,10 +515,10 @@ h2 {
     border: 2px solid var(--accent-color);
     overflow: hidden;
     cursor: pointer;
-    padding: 20px;
 }
 
 .faq summary {
+    padding: 20px;
     font-size: 20px;
     cursor: pointer;
     user-select: none;
@@ -527,8 +527,7 @@ h2 {
 
 .faq details p {
     font-size: 20px;
-    padding: 0px 20px;
-    margin-top: 10px;
+    padding: 0 20px 20px 20px;
     opacity: 0;
     transition: opacity 0.5s;
 }

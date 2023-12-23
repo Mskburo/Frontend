@@ -11,19 +11,19 @@
             <div class="footer__top">
                 <div class="column">
                     <p class="title">Контакты</p>
-                    <a href="tel:88004442137" class="text"
+                    <a :href="'tel:' + this.$store.state.tel" class="text"
                         ><img
                             src="@/assets/img/phone.svg"
                             loading="lazy"
                             alt="" />
-                        8 (800) 444-21-37</a
+                        {{this.$store.state.tel}}</a
                     >
-                    <a href="mailto:support@mskburo.ru" class="text"
+                    <a :href="'mailto:' + this.$store.state.email" class="text"
                         ><img
                             src="@/assets/img/mail.svg"
                             loading="lazy"
                             alt="" />
-                        support@mskburo.ru</a
+                            {{this.$store.state.email}}</a
                     >
                 </div>
                 <div class="column">
@@ -96,7 +96,7 @@
                     <!-- <a href="http://"
                         ><img src="@/assets/img/tg.svg" alt="Телеграм"
                     /></a> -->
-                    <a href="https://wa.me/79854346148" target="_blank"
+                    <a :href="this.$store.state.whatsappLink" target="_blank"
                         ><img
                             src="@/assets/img/qr-whatsapp.svg"
                             loading="lazy"
