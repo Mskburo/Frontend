@@ -323,7 +323,7 @@ export default {
             );
         },
         freeTicketRequest() {
-            let url = `https://wa.me/+79854346148?text=Здравстуйте, хочу оформить льготный билет на экскурсию "${
+            let url = `${this.$store.state.whatsappLink}?text=Здравстуйте, хочу оформить льготный билет на экскурсию "${
                 this.excursionInfo.excursion.name
             }" ${this.selectedDate.split("-").reverse().join(".")} в ${
                 this.selectedTime
