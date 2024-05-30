@@ -88,6 +88,19 @@
 				</div>
 				<img src="@/assets/img/about.webp" alt="" class="about__img" />
 			</section>
+			<section class="partners">
+				<h2>Наши партнеры</h2>
+				<a href="https://pnr360.ru/" target="_blank">
+					<img
+						class="partners__img"
+						src="@/assets/img/PNR360_logo-combo_RGB_color.png"
+						alt="PNR360"
+					/>
+					<p class="partners__description">
+						При покупке билета, вы получате промокод на скидку у наших друзей
+					</p>
+				</a>
+			</section>
 			<section class="excursions" id="excursions">
 				<h2>Экскурсии</h2>
 				<!-- <div class="switch-wrapper">
@@ -147,6 +160,26 @@
 					<img
 						src="@/assets/img/gallery9.webp"
 						alt="Галлерея9"
+						loading="lazy"
+					/>
+					<img
+						src="@/assets/img/gallery11.jpg"
+						alt="Галлерея11"
+						loading="lazy"
+					/>
+					<img
+						src="@/assets/img/gallery12.jpg"
+						alt="Галлерея12"
+						loading="lazy"
+					/>
+					<img
+						src="@/assets/img/gallery13.jpg"
+						alt="Галлерея13"
+						loading="lazy"
+					/>
+					<img
+						src="@/assets/img/gallery14.jpg"
+						alt="Галлерея14"
 						loading="lazy"
 					/>
 				</div>
@@ -227,8 +260,8 @@
 	</main>
 </template>
 <script>
-import Excursion from '@/components/Excursion.vue';
-import axios from 'axios';
+import Excursion from '@/components/Excursion.vue'
+import axios from 'axios'
 
 export default {
 	name: 'Index',
@@ -239,7 +272,7 @@ export default {
 			// excursionsToShow: [],
 			excursions: [],
 			// excursionsTypes: [],
-		};
+		}
 	},
 	methods: {
 		// changeSwitch(value) {
@@ -267,19 +300,19 @@ export default {
 					// this.getExcursionsTypes();
 					this.excursions = response.data.sort(
 						(a, b) => b.excursion.is_active - a.excursion.is_active
-					);
+					)
 					setTimeout(() => {
-						this.$store.commit('SET_PAGE_LOADED');
-					}, 700);
+						this.$store.commit('SET_PAGE_LOADED')
+					}, 700)
 				})
 				.catch(err => {
-					console.log(err);
-					this.excursions = [];
-				});
+					console.log(err)
+					this.excursions = []
+				})
 		},
 	},
 	created() {
-		this.getExcursions();
+		this.getExcursions()
 	},
-};
+}
 </script>
