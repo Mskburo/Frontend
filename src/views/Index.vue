@@ -101,6 +101,12 @@
 					</p>
 				</a>
 			</section>
+			<section class="map-gis">
+				<h2>Мы в 2gis</h2>
+				<a href="https://pnr360.ru/" target="_blank">
+					<img class="map-gis__img" src="@/assets/img/qr2gis.jpg" alt="2gis" />
+				</a>
+			</section>
 			<section class="excursions" id="excursions">
 				<h2>Экскурсии</h2>
 				<!-- <div class="switch-wrapper">

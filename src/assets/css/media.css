@@ -1,156 +1,165 @@
 @media screen and (max-width: 1301px) {
-    .burger {
-        display: flex;
-    }
+	.burger {
+		display: flex;
+	}
 
-    .header .header__nav,
-    .header .header__buttons {
-        display: none;
-    }
+	.header .header__nav,
+	.header .header__buttons {
+		display: none;
+	}
 }
 
 @media screen and (max-width: 1201px) {
-    .hero {
-        padding-left: 50px;
-    }
-    .about .about__img {
-        width: 60%;
-        height: unset;
-    }
+	.hero {
+		padding-left: 50px;
+	}
+	.about .about__img {
+		width: 60%;
+		height: unset;
+	}
+
+	.map-gis {
+		flex-direction: column;
+		gap: 10px;
+	}
+
+	.map-gis h2 {
+		margin-bottom: 10px;
+	}
 }
 
 @media screen and (max-width: 901px) {
-    .excursions .grid {
-        justify-content: center;
-        gap: 50px 0
-    }
+	.excursions .grid {
+		justify-content: center;
+		gap: 50px 0;
+	}
 
-    .excursion-wrapper {
-        width: 90%;
-        padding: 0 10px;
-    }
+	.excursion-wrapper {
+		width: 90%;
+		padding: 0 10px;
+	}
 
-    .gallery img {
-        width: 40%;
-    }
+	.gallery img {
+		width: 40%;
+	}
 }
 
 @media screen and (max-width: 801px) {
-    .hero {
-        padding: 50px 0 50px 20px;
-    }
-    .flags img {
-        width: 80px;
-    }
-    .about .row {
-        gap: 10px;
-    }
+	.hero {
+		padding: 50px 0 50px 20px;
+	}
+	.flags img {
+		width: 80px;
+	}
+	.about .row {
+		gap: 10px;
+	}
 
-    .about .about__img {
-        width: 100%;
-    }
+	.about .about__img {
+		width: 100%;
+	}
 
-    .track {
-        flex-wrap: wrap;
-    }
+	.track {
+		flex-wrap: wrap;
+	}
 
-    .indent {
-        padding-left: 20px;
-    }
+	.indent {
+		padding-left: 20px;
+	}
 
-    .about .row .num {
-        width: unset;
-    }
+	.about .row .num {
+		width: unset;
+	}
 
-    .gallery img {
-        width: 100%;
-    }
+	.gallery img {
+		width: 100%;
+	}
 
-    .popup-wrapper::-webkit-scrollbar {
-        width: 4px;
-    }
+	.popup-wrapper::-webkit-scrollbar {
+		width: 4px;
+	}
 
-    .input-wrapper input,
-    .input-wrapper textarea,
-    .popup .order-select-row button,
-    .ticket .ticket__control button {
-        border-width: 1px;
-    }
+	.input-wrapper input,
+	.input-wrapper textarea,
+	.popup .order-select-row button,
+	.ticket .ticket__control button {
+		border-width: 1px;
+	}
 
-    .input-wrapper input.notValid {
-        border-width: 2px;
-    }
+	.input-wrapper input.notValid {
+		border-width: 2px;
+	}
 }
 
 @media screen and (max-width: 631px) {
-    .excursion .buttons {
-        flex-direction: column;
-        align-items: stretch;
-        gap: 10px;
-    }
+	.excursion .buttons {
+		flex-direction: column;
+		align-items: stretch;
+		gap: 10px;
+	}
 
-    .special button{
-        padding: 20px;
-        font-size: 20px;
-    }
+	.special button {
+		padding: 20px;
+		font-size: 20px;
+	}
 
-    .mobile-menu .popup{
-        gap: 15px;
-    }
+	.mobile-menu .popup {
+		gap: 15px;
+	}
 
-    .mobile-menu nav{
-        gap: 10px;
-    }
+	.mobile-menu nav {
+		gap: 10px;
+	}
 
-    .popup-wrapper {
-        width: 95%;
-    }
+	.popup-wrapper {
+		width: 95%;
+	}
 
-    .popup {
-        padding: 40px 20px 30px 20px;
-    }
+	.popup {
+		padding: 40px 20px 30px 20px;
+	}
 
-    .popup .popup__buttons {
-        flex-direction: column;
-        align-items: stretch;
-    }
+	.popup .popup__buttons {
+		flex-direction: column;
+		align-items: stretch;
+	}
 
-    .popup .popup__buttons button {
-        flex: 1 1 100%;
-    }
+	.popup .popup__buttons button {
+		flex: 1 1 100%;
+	}
 
-    .excursion-wrapper {
-        width: 100%;
-    }
+	.excursion-wrapper {
+		width: 100%;
+	}
 
-    .footer .socials {
-        flex-direction: column;
-    }
+	.footer .socials {
+		flex-direction: column;
+	}
 }
 
 @media screen and (max-width: 501px) {
-    .hero {
-        padding-left: 10px;
-    }
-    .footer .logo {
-        flex-direction: column;
-        align-items: flex-start;
-    }
+	.hero {
+		padding-left: 10px;
+	}
+	.footer .logo {
+		flex-direction: column;
+		align-items: flex-start;
+	}
 
-    .ticket {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 10px;
-        padding: 10px;
-        border-radius: 10px;
-        border: 1px solid var(--accent-color);
-    }
+	.ticket {
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 10px;
+		padding: 10px;
+		border-radius: 10px;
+		border: 1px solid var(--accent-color);
+	}
 
-    .order-tickets {
-        gap: 10px;
-    }
+	.order-tickets {
+		gap: 10px;
+	}
 
-    .order-tickets.indent {
-        padding-left: 0;
-    }
+	.order-tickets.indent {
+		padding-left: 0;
+	}
 }
