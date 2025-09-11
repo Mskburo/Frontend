@@ -102,7 +102,7 @@
 				</a>
 			</section>
 			<section class="map-gis">
-				<h2>Мы в 2gis</h2>
+				<h2>Отзывы на 2 ГИС</h2>
 				<a href="https://pnr360.ru/" target="_blank">
 					<img class="map-gis__img" src="@/assets/img/qr2gis.jpg" alt="2gis" />
 				</a>
@@ -322,3 +322,4 @@ export default {
 	},
 }
 </script>
+
