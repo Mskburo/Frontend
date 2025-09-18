@@ -344,6 +344,19 @@ h2 {
 	max-width: 100%;
 }
 
+.rt_img-wrapper {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.rt_img {
+	border: 1px solid black;
+	height: 600px;
+	margin-top: 40px;
+	border-radius: var(--border-radius);
+}
+
 .partners__description {
 	margin-top: 10px;
 	text-decoration: none;

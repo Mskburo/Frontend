@@ -42,6 +42,12 @@
 	.gallery img {
 		width: 40%;
 	}
+
+	.rt_img {
+		height: unset;
+		max-width: 60%;
+		margin-top: 20px;
+	}
 }
 
 @media screen and (max-width: 801px) {
@@ -134,6 +140,10 @@
 
 	.footer .socials {
 		flex-direction: column;
+	}
+
+	.rt_img {
+		max-width: 90%;
 	}
 }
 

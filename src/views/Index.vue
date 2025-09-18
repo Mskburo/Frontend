@@ -100,6 +100,13 @@
 						При покупке билета, вы получате промокод на скидку у наших друзей
 					</p>
 				</a>
+				<a class="rt_img-wrapper" href="files/RT.pdf" target="_blank">
+					<img
+						class="rt_img"
+						src="@/assets/img/RT.png"
+						alt="Благодарственное письмо от RT"
+					/>
+				</a>
 			</section>
 			<section class="map-gis">
 				<h2>Отзывы на 2 ГИС</h2>
